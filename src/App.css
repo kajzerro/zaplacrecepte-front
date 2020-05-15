@@ -1,0 +1,8 @@
+.patient-row {
+  border: 1px solid #ccc;
+}
+
+.patient-row-right {
+  position: absolute;
+  right: 20px;
+}
