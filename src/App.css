@@ -1,8 +1,21 @@
+.patient-list {
+    margin-top: 80px;
+}
+
 .patient-row {
-  border: 1px solid #ccc;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.patient-row button{
+    height: 100%;
 }
 
 .patient-row-right {
-  position: absolute;
-  right: 20px;
+    position: absolute;
+    right: 20px;
+}
+
+.patient-list .add-person {
+    margin-bottom: 50px;
 }
