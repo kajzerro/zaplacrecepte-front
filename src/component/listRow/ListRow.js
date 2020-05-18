@@ -14,12 +14,17 @@ function ListRow(props) {
 
     return (
         <div className="patient-row row">
-            <div className="offset-2 col-4">
+            <div className="offset-1 col-2">
                 <h2>
                 {props.name}
                 </h2>
             </div>
             <div className="offset-1 col-3">
+                <h2>
+                {props.surname}
+                </h2>
+            </div>
+            <div className="offset-1 col-2">
                     {createButton(props.status)}
             </div>
         </div>
