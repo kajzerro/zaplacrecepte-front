@@ -8,16 +8,34 @@ import axios from 'axios';
 function ListPage() {
 
     const [isLoading, setIsLoading] = useState(false);
-    const [patientData, setPatientData] = useState([]);
+    const [prescriptionsData, setPrescriptionsData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [formFirstName, setFormFirstName] = useState("");
     const [formLastName, setFormLastName] = useState("");
+    const [formPesel, setFormPesel] = useState("");
+    const [formPostalCode, setFormPostalCode] = useState("");
+    const [formRemarks, setFormRemarks] = useState("");
+    const [formPhoneNumber, setFormPhoneNumber] = useState("");
+    const [formEmail, setFormEmail] = useState("");
 
     const handleClose = () => setShowModal(false);
     const handleSave = () => {
-        setPatientData(patientData.concat({name: formFirstName, surname: formLastName, status: 'unpaid'}));
-        fetchData();
-        setShowModal(false);
+        axios.post("/api/prescriptions/",
+            {
+                firstName: formFirstName,
+                lastName: formLastName,
+                pesel: formPesel,
+                postalCode: formPostalCode,
+                remarks: formRemarks,
+                phoneNumber: formPhoneNumber,
+                email : formEmail
+
+            })
+            .then(() => {
+                fetchData();
+                setShowModal(false);
+            })
+            .catch(err => alert(err));
     };
     const handleShow = () => setShowModal(true);
     const createFirstLastClassName = (collection, index) => {
@@ -33,7 +51,7 @@ function ListPage() {
         setIsLoading(true);
         axios.get("/api/prescriptions/")
             .then(res => {
-                setPatientData(res.data);
+                setPrescriptionsData(res.data);
             })
             .catch(err => alert(err))
             .finally(() => {
@@ -66,9 +84,8 @@ function ListPage() {
                     </div>
                 </div>
                 }
-                {patientData.map((row, index) => (
-                    <ListRow name={row.name} surname={row.surname} status={row.status}
-                             className={createFirstLastClassName(patientData, index)}/>
+                {prescriptionsData.map((row, index) => (
+                    <ListRow prescription={row} className={createFirstLastClassName(prescriptionsData, index)}/>
                 ))}
 
             </div>
@@ -102,6 +119,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">PESEL</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
+                            onChange={e => setFormPesel(e.target.value)}
                             placeholder="PESEL"
                             aria-describedby="inputGroup-sizing-default"
                         />
@@ -111,6 +129,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">Kod pocztowy</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
+                            onChange={e => setFormPostalCode(e.target.value)}
                             placeholder="Kod pocztowy"
                             aria-describedby="inputGroup-sizing-default"
                         />
@@ -120,6 +139,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">Uwagi/Objawy</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
+                            onChange={e => setFormRemarks(e.target.value)}
                             placeholder="Uwagi/objawy"
                             aria-describedby="inputGroup-sizing-default"
                         />
@@ -129,6 +149,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">Numer telefonu</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
+                            onChange={e => setFormPhoneNumber(e.target.value)}
                             placeholder="Numer telefonu"
                             aria-describedby="inputGroup-sizing-default"
                         />
@@ -138,6 +159,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">Email</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
+                            onChange={e => setFormEmail(e.target.value)}
                             placeholder="Email"
                             aria-describedby="inputGroup-sizing-default"
                         />

@@ -22,11 +22,11 @@ function ListRow(props) {
                 <div className={"patient-row row " + props.className}>
                     <div className="col-4">
                         <h2>
-                            {props.name} {props.surname}
+                            {props.prescription.firstName} {props.prescription.lastName}
                         </h2>
                     </div>
                     <div className="offset-4 col-4">
-                        {createButton(props.status)}
+                        {createButton(props.prescription.status)}
                     </div>
                 </div>
             </div>
