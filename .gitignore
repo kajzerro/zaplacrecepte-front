@@ -8,6 +8,7 @@
 
 # User-specific stuff
 
+build
 *.iml
 .idea
 .idea/**/workspace.xml

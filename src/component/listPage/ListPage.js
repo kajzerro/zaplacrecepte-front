@@ -1,18 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ListRow from '../listRow/ListRow';
 import Modal from 'react-bootstrap/Modal'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import axios from 'axios';
 
 function ListPage() {
 
-    const [patientData, setPatientData] = useState([
-        {name: 'Piotr', surname: 'Krzystyniak', status: 'paid'},
-        {name: 'Piotr', surname: 'Kajzer', status: 'unpaid'},
-        {name: 'Kubuś', surname: 'Osika', status: 'done'}
-    ]);
-
-
+    const [patientData, setPatientData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [formFirstName, setFormFirstName] = useState("");
     const [formLastName, setFormLastName] = useState("");
@@ -32,6 +27,16 @@ function ListPage() {
         }
         return "";
     };
+
+    function fetchData() {
+        axios.get("/api/prescriptions/")
+            .then(res => { setPatientData(res.data);})
+            .catch(err => alert(err));
+    }
+
+    useEffect(() => {
+        fetchData();
+    });
 
     return (
         <>
