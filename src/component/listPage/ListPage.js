@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import ListRow from '../listRow/ListRow';
 import Modal from 'react-bootstrap/Modal'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -7,6 +7,7 @@ import axios from 'axios';
 
 function ListPage() {
 
+    const [isLoading, setIsLoading] = useState(false);
     const [patientData, setPatientData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [formFirstName, setFormFirstName] = useState("");
@@ -15,28 +16,34 @@ function ListPage() {
     const handleClose = () => setShowModal(false);
     const handleSave = () => {
         setPatientData(patientData.concat({name: formFirstName, surname: formLastName, status: 'unpaid'}));
-        setShowModal(false)
+        fetchData();
+        setShowModal(false);
     };
     const handleShow = () => setShowModal(true);
     const createFirstLastClassName = (collection, index) => {
         if (index === 0) {
             return "first";
-        }
-        else if (collection.length - 1 === index) {
+        } else if (collection.length - 1 === index) {
             return "last"
         }
         return "";
     };
 
     function fetchData() {
+        setIsLoading(true);
         axios.get("/api/prescriptions/")
-            .then(res => { setPatientData(res.data);})
-            .catch(err => alert(err));
+            .then(res => {
+                setPatientData(res.data);
+            })
+            .catch(err => alert(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     useEffect(() => {
         fetchData();
-    });
+    }, []);
 
     return (
         <>
@@ -45,14 +52,23 @@ function ListPage() {
                     <div className="offset-1 col-10">
                         <div className="row">
                             <div className="add-person offset-2 col-8">
-                                <button type="button" className="btn btn-success btn-block patient-button" onClick={handleShow}>Dodaj recepte
+                                <button type="button" className="btn btn-success btn-block patient-button"
+                                        onClick={handleShow}>Dodaj recepte
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                {isLoading &&
+                <div className="text-center">
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+                }
                 {patientData.map((row, index) => (
-                    <ListRow name={row.name} surname={row.surname} status={row.status} className={createFirstLastClassName(patientData, index)}/>
+                    <ListRow name={row.name} surname={row.surname} status={row.status}
+                             className={createFirstLastClassName(patientData, index)}/>
                 ))}
 
             </div>
