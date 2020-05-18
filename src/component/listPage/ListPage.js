@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ListRow from '../listRow/ListRow';
 import Modal from 'react-bootstrap/Modal'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -14,25 +14,40 @@ function ListPage() {
 
 
     const [showModal, setShowModal] = useState(false);
-    const [formName, setFormName] = useState("");
-    const [formSurname, setFormSurname] = useState("");
+    const [formFirstName, setFormFirstName] = useState("");
+    const [formLastName, setFormLastName] = useState("");
 
     const handleClose = () => setShowModal(false);
     const handleSave = () => {
-        setPatientData(patientData.concat({name: formName, surname: formSurname, status: 'unpaid'}));
-        setShowModal(false)};
+        setPatientData(patientData.concat({name: formFirstName, surname: formLastName, status: 'unpaid'}));
+        setShowModal(false)
+    };
     const handleShow = () => setShowModal(true);
+    const createFirstLastClassName = (collection, index) => {
+        if (index === 0) {
+            return "first";
+        }
+        else if (collection.length - 1 === index) {
+            return "last"
+        }
+        return "";
+    };
 
     return (
         <>
             <div className="patient-list container">
                 <div className="row">
-                    <div className="add-person offset-10 col-2">
-                        <button type="button" className="btn btn-success btn-block" onClick={handleShow}>Dodaj recepte</button>
+                    <div className="offset-1 col-10">
+                        <div className="row">
+                            <div className="add-person offset-2 col-8">
+                                <button type="button" className="btn btn-success btn-block patient-button" onClick={handleShow}>Dodaj recepte
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {patientData.map(row => (
-                    <ListRow name={row.name} surname={row.surname} status={row.status}/>
+                {patientData.map((row, index) => (
+                    <ListRow name={row.name} surname={row.surname} status={row.status} className={createFirstLastClassName(patientData, index)}/>
                 ))}
 
             </div>
@@ -46,7 +61,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">Imię</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
-                            onChange={e => setFormName(e.target.value)}
+                            onChange={e => setFormFirstName(e.target.value)}
                             placeholder="Imię pacjenta"
                             aria-describedby="inputGroup-sizing-default"
                         />
@@ -56,7 +71,7 @@ function ListPage() {
                             <InputGroup.Text id="inputGroup-sizing-default">Nazwisko</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
-                            onChange={e => setFormSurname(e.target.value)}
+                            onChange={e => setFormLastName(e.target.value)}
                             placeholder="Nazwisko pacjenta"
                             aria-describedby="inputGroup-sizing-default"
                         />

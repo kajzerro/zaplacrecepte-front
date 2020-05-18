@@ -7,6 +7,16 @@
     padding: 5px;
 }
 
+.patient-row.first {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.patient-row.last {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
 .patient-row button{
     height: 100%;
 }
@@ -18,4 +28,12 @@
 
 .patient-list .add-person {
     margin-bottom: 50px;
+}
+
+.patient-list .add-person button{
+    padding: 20px;
+}
+
+.patient-button {
+    border-radius: 20px;
 }
