@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import './LoginPage.css';
+import axios from 'axios';
 
 function LoginPage() {
+
+    function login() {
+        const token = Buffer.from(formLogin+":"+formPassword, 'utf8').toString('base64');
+
+        axios.get("/api/login",
+            {
+                headers: {
+                    'Authorization': "Basic " + token
+                }})
+            .then(() => {
+                history.push('/lista');
+            })
+            .catch(err => alert(err));
+    }
+
+    const [formLogin, setFormLogin] = useState("");
+    const [formPassword, setFormPassword] = useState("");
+
     let history = useHistory();
     return (
         <div className="login-page">
@@ -11,11 +30,11 @@ function LoginPage() {
                     <div className="icon"><img src="/logo.png" alt="Smiley face" height="80" width="80"/></div>
                     <form>
                         <input type="text" id="login" className="second" name="login"
-                               placeholder="Nazwa gabinetu"/>
-                        <input type="text" id="password" className="third" name="login"
-                               placeholder="Hasło"/>
+                               placeholder="Nazwa gabinetu" onChange={e => setFormLogin(e.target.value)}/>
+                        <input type="password" id="password" className="third" name="login"
+                               placeholder="Hasło" onChange={e => setFormPassword(e.target.value)}/>
                         <input type="button" className="fourth" value="Zaloguj się"
-                               onClick={() => history.push('/lista')}/>
+                               onClick={() => login()}/>
                     </form>
                     <div id="formFooter">
                         <a className="underlineHover" href="#">Zapomniałaś/zapomniałeś hasła?</a>
