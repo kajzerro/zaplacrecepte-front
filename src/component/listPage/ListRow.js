@@ -11,7 +11,6 @@ function createButton(status) {
         default:
             return null;
     }
-
 }
 
 function ListRow(props) {
