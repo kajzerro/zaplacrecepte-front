@@ -6,13 +6,13 @@ import axios from 'axios';
 function LoginPage() {
 
     function login() {
-        const token = Buffer.from(formLogin+":"+formPassword, 'utf8').toString('base64');
-
         axios.get("https://api.zaplacrecepte.pl/api/login",
             {
-                headers: {
-                    'Authorization': "Basic " + token
-                }})
+                auth: {
+                    username: formLogin,
+                    password: formPassword
+                }
+            })
             .then(() => {
                 history.push('/lista');
             })
