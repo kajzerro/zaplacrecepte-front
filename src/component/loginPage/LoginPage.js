@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import './LoginPage.css';
 import axios from 'axios';
+import {getEndpoint} from '../config/Config';
 
 function LoginPage() {
 
     function login() {
-        axios.get("https://api.zaplacrecepte.pl/api/login",
+        axios.get(getEndpoint() + "/api/login",
             {
                 auth: {
                     username: formLogin,
@@ -37,7 +38,7 @@ function LoginPage() {
                                onClick={() => login()}/>
                     </form>
                     <div id="formFooter">
-                        <a className="underlineHover" href="#">Zapomniałaś/zapomniałeś hasła?</a>
+                        <a className="underlineHover" href=".">Zapomniałaś/zapomniałeś hasła?</a>
                     </div>
                 </div>
             </div>

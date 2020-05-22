@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ListRow from './ListRow';
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios';
+import {getEndpoint} from '../config/Config';
 import PrescriptionFields from './PrescriptionFields';
 
 function ListPage() {
@@ -13,7 +14,7 @@ function ListPage() {
 
     const handleClose = () => setShowModal(false);
     const handleSave = () => {
-        axios.post("https://api.zaplacrecepte.pl/api/prescriptions/",
+        axios.post(getEndpoint() + "/api/prescriptions/",
             editedPrescriptionData)
             .then(() => {
                 fetchData();
@@ -33,7 +34,7 @@ function ListPage() {
 
     function fetchData() {
         setIsLoading(true);
-        axios.get("https://api.zaplacrecepte.pl/api/prescriptions/")
+        axios.get(getEndpoint() + "/api/prescriptions/")
             .then(res => {
                 setPrescriptionsData(res.data);
             })
@@ -77,7 +78,7 @@ function ListPage() {
                     <Modal.Title>Dodawanie recepty</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <PrescriptionFields onChange={setEditedPrescriptionData}></PrescriptionFields>
+                    <PrescriptionFields onChange={setEditedPrescriptionData}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>

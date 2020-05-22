@@ -12,9 +12,9 @@ function ListRow(props) {
     const [formRemarks, setFormRemarks] = useState("");
     const [formPhoneNumber, setFormPhoneNumber] = useState("");
     const [formEmail, setFormEmail] = useState("");
-
+    const onChange = props.onChange;
     useEffect(() => {
-        props.onChange(
+        onChange(
             {
                 firstName: formFirstName,
                 lastName: formLastName,
@@ -22,9 +22,9 @@ function ListRow(props) {
                 postalCode: formPostalCode,
                 remarks: formRemarks,
                 phoneNumber: formPhoneNumber,
-                email : formEmail
+                email: formEmail
             });
-    }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail ]);
+    }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, onChange]);
 
     return (
         <>
