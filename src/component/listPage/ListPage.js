@@ -5,6 +5,7 @@ import axios from 'axios';
 import {getEndpoint} from '../config/Config';
 import PrescriptionFields from './PrescriptionFields';
 import StatusSelection from './StatusSelection';
+import {useHistory} from "react-router-dom";
 
 function ListPage() {
 
@@ -17,8 +18,10 @@ function ListPage() {
     const [editedStatus, setEditedStatus] = useState("");
     const [selectedRowData, setSelectedRowData] = useState({});
 
-    const handleClose = () => {setShowAddModal(false);
-        setShowEditModal(false);};
+    const handleClose = () => {
+        setShowAddModal(false);
+        setShowEditModal(false);
+    };
     const handleAddSave = () => {
         axios.post(getEndpoint() + "/api/prescriptions/",
             newPrescriptionData)
@@ -56,7 +59,10 @@ function ListPage() {
             .then(res => {
                 setPrescriptionsData(res.data);
             })
-            .catch(err => alert(err))
+            .catch(err => {
+                alert(err);
+                history.push('/');
+            })
             .finally(() => {
                 setIsLoading(false);
             });
@@ -66,6 +72,8 @@ function ListPage() {
         fetchData();
     }, []);
 
+    let history = useHistory();
+
     return (
         <>
             <div className="patient-list container">
@@ -74,7 +82,7 @@ function ListPage() {
                         <div className="row">
                             <div className="add-person offset-2 col-8">
                                 <button type="button" className="btn btn-success btn-block patient-button"
-                                        onClick={ () => setShowAddModal(true)}>Dodaj recepte
+                                        onClick={() => setShowAddModal(true)}>Dodaj recepte
                                 </button>
                             </div>
                             {isLoading &&
@@ -88,7 +96,10 @@ function ListPage() {
                     </div>
                 </div>
                 {prescriptionsData.map((row, index) => (
-                    <ListRow key={row.id} prescription={row} className={createFirstLastClassName(prescriptionsData, index)} onClick={() => {handleEditShow(row)}}/>
+                    <ListRow key={row.id} prescription={row}
+                             className={createFirstLastClassName(prescriptionsData, index)} onClick={() => {
+                        handleEditShow(row)
+                    }}/>
                 ))}
             </div>
             <Modal show={showAddModal} onHide={handleClose} animation={false}>
