@@ -18,7 +18,7 @@ function ListRow(props) {
     return (
         <div className="row">
             <div className="offset-1 col-10">
-                <div className={"patient-row row " + props.className}>
+                <div className={"patient-row row " + props.className} onClick={props.onClick}>
                     <div className="col-4">
                         <h2>
                             {props.prescription.firstName} {props.prescription.lastName}

@@ -37,9 +37,6 @@ function LoginPage() {
                         <input type="button" className="fourth" value="Zaloguj się"
                                onClick={() => login()}/>
                     </form>
-                    <div id="formFooter">
-                        <a className="underlineHover" href=".">Zapomniałaś/zapomniałeś hasła?</a>
-                    </div>
                 </div>
             </div>
         </div>

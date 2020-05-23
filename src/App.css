@@ -2,9 +2,21 @@
     margin-top: 80px;
 }
 
+.patient-spinner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .patient-row {
     border: 1px solid #ccc;
     padding: 5px;
+    cursor: pointer;
+}
+
+.patient-row:hover {
+    background-color: #e2eeff;
 }
 
 .patient-row.first {
@@ -36,4 +48,24 @@
 
 .patient-button {
     border-radius: 20px;
+}
+
+.patient-no-paddings .col-4{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.patient-status-info {
+    align-items: center;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
 }
