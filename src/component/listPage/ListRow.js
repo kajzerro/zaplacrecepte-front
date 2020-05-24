@@ -19,12 +19,17 @@ function ListRow(props) {
         <div className="row">
             <div className="offset-1 col-10">
                 <div className={"patient-row row " + props.className} onClick={props.onClick}>
-                    <div className="col-4">
+                    <div className="col-3">
+                        <h2>
+                            {props.prescription.createDateTime.format("YYYY-MM-DD") }
+                        </h2>
+                    </div>
+                    <div className="col-6">
                         <h2>
                             {props.prescription.firstName} {props.prescription.lastName}
                         </h2>
                     </div>
-                    <div className="offset-4 col-4">
+                    <div className="col-3">
                         {createButton(props.prescription.status)}
                     </div>
                 </div>

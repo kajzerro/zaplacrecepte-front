@@ -6,6 +6,7 @@ import {getEndpoint} from '../config/Config';
 import PrescriptionFields from './PrescriptionFields';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
+import moment from 'moment-timezone';
 
 function ListPage() {
 
@@ -57,6 +58,18 @@ function ListPage() {
         setIsLoading(true);
         axios.get(getEndpoint() + "/api/prescriptions/")
             .then(res => {
+
+                for(let i = 0; i < res.data.length ; i++){
+                    let row = res.data[i];
+                    if(row.createDateTime !== null) {
+                        row.createDateTime = moment(row.createDateTime);
+                    }
+                    else {
+                        row.createDateTime = moment("2005-05-05T05:05:00+02:00");
+                    }
+                }
+                res.data.sort((a,b) => (a.createDateTime > b.createDateTime) ? -1 : ((b.createDateTime > a.createDateTime) ? 1 : 0));
+                console.log(res.data);
                 setPrescriptionsData(res.data);
             })
             .catch(err => {
