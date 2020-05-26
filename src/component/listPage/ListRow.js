@@ -2,12 +2,15 @@ import React from 'react';
 
 function createButton(status) {
     switch (status) {
-        case 'paid':
+        case 'WAITING_FOR_CONFIRMATION':
             return <button type="button" className="btn btn-success btn-block patient-button">Zapłacona</button>;
-        case 'unpaid':
+        case 'NEW':
+        case 'PENDING':
             return <button type="button" className="btn btn-warning btn-block patient-button">Niezapłacona</button>;
-        case 'done':
+        case 'COMPLETED':
             return <button type="button" className="btn btn-primary btn-block patient-button">Zrealizowana</button>;
+        case 'CANCELED':
+            return <button type="button" className="btn btn-danger btn-block patient-button">Anulowana</button>;
         default:
             return null;
     }

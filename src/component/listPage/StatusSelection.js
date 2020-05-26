@@ -10,30 +10,38 @@ function ListRow(props) {
 
     return (
         <div>
-            <div className="mb-3 text-center patient-status-info">Status płatności:</div>
+            <div className="mb-3 text-center patient-status-info">Status:</div>
             <div className="mb-3 container patient-no-paddings">
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-3">
                         <button
-                            className={"btn btn-block " + (formStatus === "unpaid" ? "btn-primary" : "btn-outline-secondary")}
+                            className={"btn btn-block " + (formStatus === "CANCELED" ? "btn-primary" : "btn-outline-secondary")}
                             onClick={() => {
-                                setFormStatus("unpaid")
+                                setFormStatus("CANCELED")
+                            }}>Anulowana
+                        </button>
+                    </div>
+                    <div className="col-3">
+                        <button
+                            className={"btn btn-block " + ((formStatus === "PENDING" || formStatus === "NEW") ? "btn-primary" : "btn-outline-secondary")}
+                            onClick={() => {
+                                setFormStatus("PENDING")
                             }}>Niezapłacona
                         </button>
                     </div>
-                    <div className="col-4">
+                    <div className="col-3">
                         <button
-                            className={"btn btn-block " + (formStatus === "paid" ? "btn-primary" : "btn-outline-secondary")}
+                            className={"btn btn-block " + (formStatus === "WAITING_FOR_CONFIRMATION" ? "btn-primary" : "btn-outline-secondary")}
                             onClick={() => {
-                                setFormStatus("paid")
+                                setFormStatus("WAITING_FOR_CONFIRMATION")
                             }}>Zapłacona
                         </button>
                     </div>
-                    <div className="col-4">
+                    <div className="col-3">
                         <button
-                            className={"btn btn-block " + (formStatus === "done" ? "btn-primary" : "btn-outline-secondary")}
+                            className={"btn btn-block " + (formStatus === "COMPLETED" ? "btn-primary" : "btn-outline-secondary")}
                             onClick={() => {
-                                setFormStatus("done")
+                                setFormStatus("COMPLETED")
                             }}>Zrealizowana
                         </button>
                     </div>
