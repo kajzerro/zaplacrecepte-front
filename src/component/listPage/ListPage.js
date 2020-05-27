@@ -7,6 +7,8 @@ import PrescriptionFields from './PrescriptionFields';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
 import moment from 'moment-timezone';
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
 
 function ListPage() {
 
@@ -18,6 +20,8 @@ function ListPage() {
     const [editedPrescriptionData, setEditedPrescriptionData] = useState({});
     const [editedStatus, setEditedStatus] = useState("");
     const [selectedRowData, setSelectedRowData] = useState({});
+    const [inRealizationState, setInRealizationState] = useState(false);
+    const [editedPrescriptionNumber, setEditedPrescriptionNumber] = useState("");
 
     const handleClose = () => {
         setShowAddModal(false);
@@ -34,7 +38,7 @@ function ListPage() {
     };
     const handleEditSave = () => {
         axios.put(getEndpoint() + "/api/prescriptions/" + selectedRowData.id,
-            {...editedPrescriptionData, status: editedStatus})
+            {...editedPrescriptionData, status: editedStatus, prescriptionNumber: editedPrescriptionNumber})
             .then(() => {
                 fetchData();
                 setShowEditModal(false);
@@ -42,8 +46,10 @@ function ListPage() {
             .catch(err => alert(err));
     };
     const handleEditShow = (data) => {
+        setInRealizationState(false);
         setSelectedRowData(data);
         setShowEditModal(true);
+        setEditedPrescriptionNumber(data.prescriptionNumber);
     };
     const createFirstLastClassName = (collection, index) => {
         if (index === 0) {
@@ -59,16 +65,15 @@ function ListPage() {
         axios.get(getEndpoint() + "/api/prescriptions/")
             .then(res => {
 
-                for(let i = 0; i < res.data.length ; i++){
+                for (let i = 0; i < res.data.length; i++) {
                     let row = res.data[i];
-                    if(row.createDateTime !== null) {
+                    if (row.createDateTime !== null) {
                         row.createDateTime = moment(row.createDateTime);
-                    }
-                    else {
+                    } else {
                         row.createDateTime = moment("2005-05-05T05:05:00+02:00");
                     }
                 }
-                res.data.sort((a,b) => (a.createDateTime > b.createDateTime) ? -1 : ((b.createDateTime > a.createDateTime) ? 1 : 0));
+                res.data.sort((a, b) => (a.createDateTime > b.createDateTime) ? -1 : ((b.createDateTime > a.createDateTime) ? 1 : 0));
                 console.log(res.data);
                 setPrescriptionsData(res.data);
             })
@@ -136,13 +141,52 @@ function ListPage() {
                     <Modal.Title>Edycja recepty</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
-                    <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}/>
+                    {
+                        (inRealizationState || selectedRowData.status === "COMPLETED") &&
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="inputGroup-sizing-default">Numer recepty</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                value={editedPrescriptionNumber}
+                                onChange={e => setEditedPrescriptionNumber(e.target.value)}
+                                placeholder="Numer recepty"
+                                aria-describedby="inputGroup-sizing-default"
+                            />
+                        </InputGroup>
+                    }
+                    {
+                        !inRealizationState &&
+                        <>
+                            {selectedRowData.status !== "COMPLETED" &&
+                            <button
+                                className={"btn btn-block btn-primary mb-3"}
+                                onClick={() => {
+                                    setInRealizationState(true);
+                                    setEditedStatus('COMPLETED');
+                                }}>Zrealizuj
+                            </button>
+                            }
+                            <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
+                            <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}/>
+                        </>
+                    }
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-secondary" onClick={handleClose}>
-                        Zamknij
-                    </button>
+                    {
+                        !inRealizationState &&
+                        <button className="btn btn-secondary" onClick={handleClose}>
+                            Zamknij
+                        </button>
+                    }
+                    {
+                        inRealizationState &&
+                        <button className="btn btn-secondary" onClick={() => {
+                            setInRealizationState(false)
+                        }}>
+                            Wstecz
+                        </button>
+                    }
                     <button className="btn btn-primary" onClick={handleEditSave}>
                         Zapisz zmiany
                     </button>
