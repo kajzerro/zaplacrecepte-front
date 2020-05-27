@@ -2,6 +2,17 @@
     margin-top: 80px;
 }
 
+.patient-list-table {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+    margin-bottom: 50px;
+    color: #636363;
+}
+
+.patient-list-table > .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .patient-spinner {
     position: absolute;
     left: 0;
@@ -9,10 +20,16 @@
     bottom: 0;
 }
 
+.patient-row-wrapper {
+    width: 100%;
+}
+
 .patient-row {
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #cccccc63;
     padding: 5px;
     cursor: pointer;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .patient-row:hover {
@@ -46,8 +63,13 @@
     padding: 20px;
 }
 
-.patient-button {
-    border-radius: 20px;
+.patient-row button.patient-button {
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.patient-add-button {
+    background-color: #ddffd8b5;
 }
 
 .patient-no-paddings .col-3{

@@ -3,14 +3,14 @@ import React from 'react';
 function createButton(status) {
     switch (status) {
         case 'WAITING_FOR_CONFIRMATION':
-            return <button type="button" className="btn btn-success btn-block patient-button">Zapłacona</button>;
+            return <button disabled type="button" className="btn btn-outline-success btn-block patient-button">Zapłacona</button>;
         case 'NEW':
         case 'PENDING':
-            return <button type="button" className="btn btn-warning btn-block patient-button">Niezapłacona</button>;
+            return <button disabled type="button" className="btn btn-outline-secondary btn-block patient-button">Niezapłacona</button>;
         case 'COMPLETED':
-            return <button type="button" className="btn btn-primary btn-block patient-button">Zrealizowana</button>;
+            return <button disabled type="button" className="btn btn-outline-primary btn-block patient-button">Zrealizowana</button>;
         case 'CANCELED':
-            return <button type="button" className="btn btn-danger btn-block patient-button">Anulowana</button>;
+            return <button disabled type="button" className="btn btn-outline-danger btn-block patient-button">Anulowana</button>;
         default:
             return null;
     }
@@ -20,7 +20,7 @@ function ListRow(props) {
 
     return (
         <div className="row">
-            <div className="offset-1 col-10">
+            <div className="patient-row-wrapper">
                 <div className={"patient-row row " + props.className} onClick={props.onClick}>
                     <div className="col-3">
                         <h2>

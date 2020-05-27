@@ -99,7 +99,7 @@ function ListPage() {
                     <div className="offset-1 col-10">
                         <div className="row">
                             <div className="add-person offset-2 col-8">
-                                <button type="button" className="btn btn-success btn-block patient-button"
+                                <button type="button" className="btn btn-outline-success btn-block patient-add-button"
                                         onClick={() => setShowAddModal(true)}>Dodaj recepte
                                 </button>
                             </div>
@@ -113,12 +113,14 @@ function ListPage() {
                         </div>
                     </div>
                 </div>
+                <div className="patient-list-table">
                 {prescriptionsData.map((row, index) => (
                     <ListRow key={row.id} prescription={row}
                              className={createFirstLastClassName(prescriptionsData, index)} onClick={() => {
                         handleEditShow(row)
                     }}/>
                 ))}
+                </div>
             </div>
             <Modal show={showAddModal} onHide={handleClose} animation={false}>
                 <Modal.Header closeButton>
