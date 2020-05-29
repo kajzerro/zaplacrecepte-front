@@ -13,6 +13,7 @@ import FormControl from "react-bootstrap/FormControl";
 function ListPage() {
 
     const [isLoading, setIsLoading] = useState(false);
+    const [savingInProgress, setSavingInProgress] = useState(false);
     const [prescriptionsData, setPrescriptionsData] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -28,22 +29,30 @@ function ListPage() {
         setShowEditModal(false);
     };
     const handleAddSave = () => {
+        setSavingInProgress(true);
         axios.post(getEndpoint() + "/api/prescriptions/",
             newPrescriptionData)
             .then(() => {
                 fetchData();
                 setShowAddModal(false);
             })
-            .catch(err => alert(err));
+            .catch(err => alert(err))
+            .finally(() => {
+                setSavingInProgress(false);
+            });
     };
     const handleEditSave = () => {
+        setSavingInProgress(true);
         axios.put(getEndpoint() + "/api/prescriptions/" + selectedRowData.id,
             {...editedPrescriptionData, status: editedStatus, prescriptionNumber: editedPrescriptionNumber})
             .then(() => {
                 fetchData();
                 setShowEditModal(false);
             })
-            .catch(err => alert(err));
+            .catch(err => alert(err))
+            .finally(() => {
+                setSavingInProgress(false);
+            });
     };
     const handleEditShow = (data) => {
         setInRealizationState(false);
@@ -114,12 +123,12 @@ function ListPage() {
                     </div>
                 </div>
                 <div className="patient-list-table">
-                {prescriptionsData.map((row, index) => (
-                    <ListRow key={row.id} prescription={row}
-                             className={createFirstLastClassName(prescriptionsData, index)} onClick={() => {
-                        handleEditShow(row)
-                    }}/>
-                ))}
+                    {prescriptionsData.map((row, index) => (
+                        <ListRow key={row.id} prescription={row}
+                                 className={createFirstLastClassName(prescriptionsData, index)} onClick={() => {
+                            handleEditShow(row)
+                        }}/>
+                    ))}
                 </div>
             </div>
             <Modal show={showAddModal} onHide={handleClose} animation={false}>
@@ -133,9 +142,12 @@ function ListPage() {
                     <button className="btn btn-secondary" onClick={handleClose}>
                         Zamknij
                     </button>
-                    <button className="btn btn-primary" onClick={handleAddSave}>
-                        Zapisz i dodaj recepte
-                    </button>
+                    <div className="patient-blocking-button">
+                        <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
+                        <button className="btn btn-primary" onClick={handleAddSave} disabled={savingInProgress}>
+                            Zapisz i dodaj recepte
+                        </button>
+                    </div>
                 </Modal.Footer>
             </Modal>
             <Modal show={showEditModal} onHide={handleClose} animation={false}>
