@@ -104,3 +104,14 @@
     right: 0;
     margin: auto;
 }
+
+.patient-thankyou {
+    background-color: #8cfffb14;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
