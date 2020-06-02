@@ -29,6 +29,14 @@ function ListPage() {
         setShowEditModal(false);
     };
     const handleAddSave = () => {
+        if(!newPrescriptionData.phoneNumberValid) {
+            alert("Telefon nie poprawny");
+            return;
+        }
+        if(!newPrescriptionData.emailValid) {
+            alert("Email nie poprawny");
+            return;
+        }
         setSavingInProgress(true);
         axios.post(getEndpoint() + "/api/prescriptions/",
             newPrescriptionData)

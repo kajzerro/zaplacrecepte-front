@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-
+import * as EmailValidator from 'email-validator';
 
 function ListRow(props) {
     const [formFirstName, setFormFirstName] = useState(props.initData.firstName || "");
@@ -9,8 +9,18 @@ function ListRow(props) {
     const [formPesel, setFormPesel] = useState(props.initData.pesel || "");
     const [formPostalCode, setFormPostalCode] = useState(props.initData.postalCode || "");
     const [formRemarks, setFormRemarks] = useState(props.initData.remarks || "");
-    const [formPhoneNumber, setFormPhoneNumber] = useState(props.initData.phoneNumber || "");
+    const [formPhoneNumber, setFormPhoneNumber] = useState(props.initData.phoneNumber || "+48");
+    const [formPhoneNumberValid, setPhoneNumberValid] = useState(true);
     const [formEmail, setFormEmail] = useState(props.initData.email || "");
+    const [formEmailValid, setFormEmailValid] = useState(true);
+    const formEmailValidate = (input) => {
+        setFormEmailValid(input === "" || EmailValidator.validate(input));
+    };
+    const formPhoneNumberValidate = (input) => {
+        var phoneRegexp = /\+48[0-9]{9}$/;
+        setPhoneNumberValid(input === '' || input === '+48' || input.match(phoneRegexp));
+    };
+
     const onChange = props.onChange;
     useEffect(() => {
         onChange(
@@ -21,9 +31,11 @@ function ListRow(props) {
                 postalCode: formPostalCode,
                 remarks: formRemarks,
                 phoneNumber: formPhoneNumber,
-                email: formEmail
+                phoneNumberValid: formPhoneNumberValid,
+                email: formEmail,
+                emailValid: formEmailValid
             });
-    }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, onChange]);
+    }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, formEmailValid, formPhoneNumberValid, onChange]);
 
     return (
         <>
@@ -89,7 +101,10 @@ function ListRow(props) {
                 </InputGroup.Prepend>
                 <FormControl
                     value={formPhoneNumber}
-                    onChange={e => setFormPhoneNumber(e.target.value)}
+                    onChange={e => {
+                        formPhoneNumberValidate(e.target.value);
+                        setFormPhoneNumber(e.target.value);
+                    }}
                     placeholder="Numer telefonu"
                     aria-describedby="inputGroup-sizing-default"
                 />
@@ -100,7 +115,11 @@ function ListRow(props) {
                 </InputGroup.Prepend>
                 <FormControl
                     value={formEmail}
-                    onChange={e => setFormEmail(e.target.value)}
+                    onChange={e => {
+                        formEmailValidate(e.target.value);
+                        setFormEmail(e.target.value)
+                    }
+                    }
                     placeholder="Email"
                     aria-describedby="inputGroup-sizing-default"
                 />
