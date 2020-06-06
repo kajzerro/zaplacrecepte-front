@@ -23,31 +23,31 @@ function ListPage() {
     const [selectedRowData, setSelectedRowData] = useState({});
     const [inRealizationState, setInRealizationState] = useState(false);
     const [editedPrescriptionNumber, setEditedPrescriptionNumber] = useState("");
+    const [checkAll, setCheckAll] = useState(false);
 
     const handleClose = () => {
         setShowAddModal(false);
         setShowEditModal(false);
+        setCheckAll(false);
     };
     const handleAddSave = () => {
-        if(!newPrescriptionData.phoneNumberValid) {
-            alert("Telefon nie poprawny");
-            return;
+        if(newPrescriptionData.allValid) {
+            setSavingInProgress(true);
+            axios.post(getEndpoint() + "/api/prescriptions/",
+                newPrescriptionData)
+                .then(() => {
+                    fetchData();
+                    setShowAddModal(false);
+                })
+                .catch(err => alert(err))
+                .finally(() => {
+                    setSavingInProgress(false);
+                    setCheckAll(false);
+                });
         }
-        if(!newPrescriptionData.emailValid) {
-            alert("Email nie poprawny");
-            return;
+        else {
+            setCheckAll(true);
         }
-        setSavingInProgress(true);
-        axios.post(getEndpoint() + "/api/prescriptions/",
-            newPrescriptionData)
-            .then(() => {
-                fetchData();
-                setShowAddModal(false);
-            })
-            .catch(err => alert(err))
-            .finally(() => {
-                setSavingInProgress(false);
-            });
     };
     const handleEditSave = () => {
         setSavingInProgress(true);
@@ -91,7 +91,6 @@ function ListPage() {
                     }
                 }
                 res.data.sort((a, b) => (a.createDateTime > b.createDateTime) ? -1 : ((b.createDateTime > a.createDateTime) ? 1 : 0));
-                console.log(res.data);
                 setPrescriptionsData(res.data);
             })
             .catch(err => {
@@ -144,7 +143,7 @@ function ListPage() {
                     <Modal.Title>Dodawanie recepty</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <PrescriptionFields onChange={setNewPrescriptionData} initData={{}}/>
+                    <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
