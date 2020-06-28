@@ -3,7 +3,7 @@ import ListRow from './ListRow';
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
-import PrescriptionFields from './PrescriptionFields';
+import PrescriptionFields from '../common/PrescriptionFields';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
 import moment from 'moment-timezone';

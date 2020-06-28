@@ -108,6 +108,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">Imię</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     value={formFirstName}
                     onChange={e => {
                         setFormFirstNameValid(isNotEmpty(e.target.value));
@@ -124,6 +125,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">Nazwisko</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     value={formLastName}
                     onChange={e => {
                         setFormLastNameValid(isNotEmpty(e.target.value));
@@ -140,6 +142,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">PESEL</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     value={formPesel}
                     onChange={e => {
                         setFormPeselValid(isPeselValid(e.target.value));
@@ -156,6 +159,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">Kod pocztowy</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     value={formPostalCode}
                     onChange={e => setFormPostalCode(e.target.value)}
                     placeholder="Kod pocztowy"
@@ -167,6 +171,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">Uwagi/Objawy</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     as="textarea"
                     value={formRemarks}
                     onChange={e => {
@@ -184,6 +189,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">Numer telefonu</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     value={formPhoneNumber}
                     onChange={e => {
                         setFormPhoneNumberValid(isPhoneNumberValid(e.target.value));
@@ -200,6 +206,7 @@ function ListRow(props) {
                     <InputGroup.Text id="inputGroup-sizing-default">Email</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
+                    disabled={props.disabled}
                     value={formEmail}
                     onChange={e => {
                         setFormEmailValid(isEmailValid(e.target.value));
