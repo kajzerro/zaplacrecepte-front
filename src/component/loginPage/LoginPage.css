@@ -262,3 +262,19 @@
 .login-page #icon {
     width: 60%;
 }
+
+.login-page .login-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.login-page .login-footer li{
+    display: inline-block;
+    padding-left: 3em;
+    padding-right: 3em;
+    color: #767676;
+    cursor: pointer;
+}

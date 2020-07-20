@@ -133,3 +133,21 @@
 {
     border-color: red;
 }
+.cooperation {
+    background-color: #8cfffb14;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.statue {
+  background-color: #8cfffb14;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  padding: 2em;
+}

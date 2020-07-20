@@ -39,6 +39,14 @@ function LoginPage() {
                     </form>
                 </div>
             </div>
+            <div className="login-footer">
+                <hr/>
+                <ul>
+                    <li onClick={() => history.push('/regulamin')}>Regulamin</li>
+                    <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
+                    <li onClick={() => history.push('/kontakt')}>Kontakt</li>
+                </ul>
+            </div>
         </div>
     );
 }
