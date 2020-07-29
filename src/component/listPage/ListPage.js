@@ -104,6 +104,8 @@ function ListPage() {
 
     useEffect(() => {
         fetchData();
+        const id = setInterval(fetchData, 60*1000);
+        return () => clearInterval(id);
     }, []);
 
     let history = useHistory();
