@@ -52,7 +52,7 @@ function ListRow(props) {
     const [formPhoneNumberValid, setFormPhoneNumberValid] = useState(isPhoneNumberValid(formPhoneNumber));
     const [formPhoneNumberChanged, setFormPhoneNumberChanged] = useState(false);
 
-    const [formEmail, setFormEmail] = useState(props.initData.email || "");
+    const [formEmail, setFormEmail] = useState(props.initData.email || "krzyampagabinet@outlook.com");
     const [formEmailValid, setFormEmailValid] = useState(isEmailValid(formEmail));
     const [formEmailChanged, setFormEmailChanged] = useState(false);
 
@@ -201,7 +201,7 @@ function ListRow(props) {
                 />
                 <div className="patient-input-error-message">Niepoprawny numer telefonu</div>
             </InputGroup>
-            <InputGroup className={"mb-3 " + (formEmailChanged && !isEmailEmpty(formEmail) && !formEmailValid ? "patient-input-invalid" : "")}>
+            <InputGroup className={"email-input mb-3 " + (formEmailChanged && !isEmailEmpty(formEmail) && !formEmailValid ? "patient-input-invalid" : "")}>
                 <InputGroup.Prepend>
                     <InputGroup.Text id="inputGroup-sizing-default">Email</InputGroup.Text>
                 </InputGroup.Prepend>

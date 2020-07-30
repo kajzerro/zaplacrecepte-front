@@ -29,7 +29,7 @@ function PaymentPage(props) {
   }, []);
 
   return (
-      <div className="container">
+      <div className="container payment-page">
         <div className="row mb-lg-5 mt-3 mb-sm-2">
           <h4 className="text-center">Szczegóły Twojego zamówienia sporządzonego przez
             gabinet Dr Marka Krzystyniaka</h4>

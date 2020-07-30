@@ -152,3 +152,7 @@
   position: fixed;
   padding: 2em;
 }
+
+.payment-page .email-input {
+    display: none;
+}
