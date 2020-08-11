@@ -51,7 +51,7 @@ function PaymentPage(props) {
               <Form.Check.Label>Oświadczam, że zapoznałem/am się z <a href="/regulamin">regulaminem</a> i akceptuje go</Form.Check.Label>
             </Form.Check>
             <a href={ clientData.orderUrl}>
-            <button className="btn btn-success btn-block patient-button" disabled={!accepted} onClick={handlePay}>
+            <button className="mb-3 btn btn-success btn-block patient-button" disabled={!accepted} onClick={handlePay}>
               Akceptuj zamówienie i przejdź do płatności
             </button>
             </a>
