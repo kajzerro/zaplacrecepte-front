@@ -157,6 +157,22 @@
     display: none;
 }
 
+.payment-page h4 {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.payment-page-cancel {
+    background-color: #8cfffb14;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .with-tooltip {
     position: relative;
 }
