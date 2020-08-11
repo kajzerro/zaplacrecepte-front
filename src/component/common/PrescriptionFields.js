@@ -3,6 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import * as EmailValidator from 'email-validator';
 import {validatePolish} from 'validate-polish';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 function ListRow(props) {
 
@@ -57,6 +58,7 @@ function ListRow(props) {
     const [formEmailChanged, setFormEmailChanged] = useState(false);
 
     const [showOneFormOfContact, setShowOneFormOfContact] = useState(false);
+    const [copied, setCopied] = useState(false);
 
 
     const isAllValid = () => {
@@ -88,7 +90,7 @@ function ListRow(props) {
     useEffect(() => {
         if(checkAll === true) {
             setFormFirstNameChanged(true);
-            setFormLastNameChanged(true)
+            setFormLastNameChanged(true);
             setFormPeselChanged(true);
             setFormRemarksChanged(true);
             if(isEmailEmpty(formEmail) && isPhoneNumberEmpty(formPhoneNumber)) {
@@ -152,6 +154,12 @@ function ListRow(props) {
                     placeholder="PESEL"
                     aria-describedby="inputGroup-sizing-default"
                 />
+                {props.copyPeselButton && <CopyToClipboard text={formPesel}
+                                 onCopy={() => {setCopied(true); setTimeout(()=> {setCopied(false);}, 2000) }}>
+                    <button className="btn btn-secondary with-tooltip">
+                        <span className="tooltiptext" style={ copied ? { opacity: 1} : {}}>PESEL skopiowany</span>
+                        Skopiuj</button>
+                </CopyToClipboard>}
                 <div className="patient-input-error-message">Niepoprawny numer PESEL</div>
             </InputGroup>
             <InputGroup className="mb-3">

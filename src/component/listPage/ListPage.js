@@ -191,7 +191,7 @@ function ListPage() {
                             </button>
                             }
                             <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
-                            <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}/>
+                            <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData} copyPeselButton/>
                         </>
                     }
                 </Modal.Body>
