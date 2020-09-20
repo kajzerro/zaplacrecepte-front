@@ -26,15 +26,15 @@ function LoginPage() {
     let history = useHistory();
     return (
         <div className="login-page">
-            <div style={{width: "50%"}}>
-                <div className="login-header">
-                    <img src="loginPage/logo.png"/>
-                    <ul>
-                        <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
-                        <li onClick={() => history.push('/kontakt')}>Kontakt</li>
-                        <li onClick={() => history.push('/regulamin')}>Regulamin</li>
-                    </ul>
-                </div>
+            <div className="login-header">
+                <img src="loginPage/logo.png"/>
+                <ul>
+                    <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
+                    <li onClick={() => history.push('/kontakt')}>Kontakt</li>
+                    <li onClick={() => history.push('/regulamin')}>Regulamin</li>
+                </ul>
+            </div>
+            <div className="left-site">
                 <div className="body-wrapper">
                     <div className="hello-header">Witaj w ZaplacRecepte.pl</div>
                     <div className="input-frame">
@@ -64,8 +64,8 @@ function LoginPage() {
                 </div>
                 <div className="login-footer">All rights reserved © copyright www.zaplacrecepte.pl 2020</div>
             </div>
-            <div className="main-image">
-                <img src="loginPage/Illustration bar.png"/>
+            <div className="right-site">
+                <img src="loginPage/loginImage.png"/>
             </div>
         </div>
     );
