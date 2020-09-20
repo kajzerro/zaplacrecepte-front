@@ -1,280 +1,183 @@
 /* BASIC */
-.login-page {
-    font-family: "Poppins", sans-serif;
-    height: 100vh;
-}
-
-.login-page a {
-    color: #92badd;
-    display: inline-block;
-    text-decoration: none;
-    font-weight: 400;
-}
-
-.login-page login-h2 {
+.login-page .login-header {
     text-align: center;
+}
+
+.login-page .login-header li{
+    display: inline-block;
+    padding-left: 37.5px;
+    padding-right: 37.5px;
+    cursor: pointer;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
     font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    display: inline-block;
-    margin: 40px 8px 10px 8px;
-    color: #cccccc;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #000000;
 }
 
-.login-page .wrapper {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    min-height: 100%;
-    padding: 20px;
+.login-page .login-header ul{
+    padding-left: 0;
+    margin-left: 88px;
+    margin-top: 62px;
 }
 
-.login-page #formContent {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
+.login-page .login-header img{
+    position: absolute;
+    left: 58px;
+    top: 30px;
+}
+
+.login-page .body-wrapper {
     position: relative;
-    padding: 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    text-align: center;
+    margin-left: 228px;
+    margin-top: 142px;
 }
 
-.login-page #formFooter {
-    background-color: #f6f6f6;
-    border-top: 1px solid #dce8f1;
-    padding: 25px;
-    text-align: center;
-    -webkit-border-radius: 0 0 10px 10px;
-    border-radius: 0 0 10px 10px;
+.login-page .hello-header {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 63px;
+    color: #2F4FA7;
 }
 
-.login-page h2.inactive {
-    color: #cccccc;
+.login-page .hello-description {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #676767;
+    margin-top: 10px;
+    margin-bottom: 12px;
 }
 
-.login-page h2.active {
-    color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
-}
+.login-page form {
 
-.login-page input[type=button], .login-page input[type=submit], .login-page input[type=reset] {
-    background-color: #56baed;
-    border: none;
-    color: white;
-    padding: 15px 80px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 13px;
-    -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
-    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
-    margin: 5px 20px 40px 20px;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
 
-.login-page input[type=button]:hover, .login-page input[type=submit]:hover, .login-page input[type=reset]:hover {
-    background-color: #39ace7;
-}
-
-.login-page input[type=button]:active, .login-page input[type=submit]:active, .login-page input[type=reset]:active {
-    -moz-transform: scale(0.95);
-    -webkit-transform: scale(0.95);
-    -o-transform: scale(0.95);
-    -ms-transform: scale(0.95);
-    transform: scale(0.95);
+    color: #2F4FA7;
 }
 
 .login-page input[type=text], .login-page input[type=password] {
-    background-color: #f6f6f6;
-    border: none;
-    color: #0d0d0d;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 5px;
-    width: 85%;
-    border: 2px solid #f6f6f6;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
-}
-
-.login-page input[type=text]:focus {
-    background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
-}
-
-.login-page input[type=text]:placeholder {
-    color: #cccccc;
-}
-
-.login-page .fadeInDown {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-
-.login-page
-
-@-webkit-keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-.login-page
-
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-.login-page
-
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.login-page
-
-@-moz-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.login-page
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.login-page .fadeIn {
-    opacity: 0;
-    -webkit-animation: fadeIn ease-in 1;
-    -moz-animation: fadeIn ease-in 1;
-    animation: fadeIn ease-in 1;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    animation-duration: 1s;
-}
-
-.login-page .fadeIn.first {
-    -webkit-animation-delay: 0.4s;
-    -moz-animation-delay: 0.4s;
-    animation-delay: 0.4s;
-}
-
-.login-page .fadeIn.second {
-    -webkit-animation-delay: 0.6s;
-    -moz-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-}
-
-.login-page .fadeIn.third {
-    -webkit-animation-delay: 0.8s;
-    -moz-animation-delay: 0.8s;
-    animation-delay: 0.8s;
-}
-
-.login-page .fadeIn.fourth {
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    animation-delay: 1s;
-}
-
-.login-page .underlineHover:after {
-    display: block;
-    left: 0;
-    bottom: -10px;
-    width: 0;
-    height: 2px;
-    background-color: #56baed;
-    content: "";
-    transition: width 0.2s;
-}
-
-.login-page .underlineHover:hover {
-    color: #0d0d0d;
-}
-
-.login-page .underlineHover:hover:after {
     width: 100%;
+    height: 54px;
+    display: block;
+    border: 1px solid #00B0FF;
+    border-radius: 4px;
+    text-indent: 15px;
+
+    /* Subtitle 1 */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #676767;
 }
 
-.login-page *:focus {
-    outline: none;
+.login-page input[type=button] {
+    width: 100%;
+    height: 54px;
+    display: block;
+    border: 1px solid #DE3500;
+    background: #DE3500;
+    border-radius: 4px;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #FFFFFF;
 }
 
-.login-page #icon {
-    width: 60%;
+.login-page .input-frame {
+    position: relative;
+    width: 412px;
+    height: 484px;
+}
+
+.login-page .input-frame label {
+    margin-top: 31px;
+    margin-bottom: 10px;
+}
+
+.login-page .input-frame .error-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    /* identical to box height, or 133% */
+    letter-spacing: 0.4px;
+    color: #E21717;
+}
+
+.login-page .input-frame .forgot-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: right;
+    color: #6D6F8E;
+    float: right;
+}
+
+.login-page .input-frame .after-input {
+margin-top: 8px;
+}
+
+.login-page .input-frame .remember-me {
+    margin-top: 10px;
+    margin-bottom: 23px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #6D6F8E;
+}
+
+.login-page .input-frame .remember-me img{
+    margin-right: 13px;
+    margin-top: -3px;
 }
 
 .login-page .login-footer {
     position: absolute;
-    bottom: 0;
+    bottom: 38px;
     left: 0;
     right: 0;
     text-align: center;
+    margin-right: 55%;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 36px;
+
+    color: #808080;
 }
 
-.login-page .login-footer li{
-    display: inline-block;
-    padding-left: 3em;
-    padding-right: 3em;
-    color: #767676;
-    cursor: pointer;
+.login-page .main-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    overflow: hidden;
 }

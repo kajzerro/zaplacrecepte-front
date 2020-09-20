@@ -26,26 +26,46 @@ function LoginPage() {
     let history = useHistory();
     return (
         <div className="login-page">
-            <div className="wrapper">
-                <div id="formContent">
-                    <div className="icon"><img src="/logo.png" alt="Smiley face" height="80" width="80"/></div>
-                    <form>
-                        <input type="text" id="login" className="second" name="login"
-                               placeholder="Nazwa gabinetu" onChange={e => setFormLogin(e.target.value)}/>
-                        <input type="password" id="password" className="third" name="login"
-                               placeholder="Hasło" onChange={e => setFormPassword(e.target.value)}/>
-                        <input type="button" className="fourth" value="Zaloguj się"
-                               onClick={() => login()}/>
-                    </form>
+            <div style={{width: "50%"}}>
+                <div className="login-header">
+                    <img src="loginPage/logo.png"/>
+                    <ul>
+                        <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
+                        <li onClick={() => history.push('/kontakt')}>Kontakt</li>
+                        <li onClick={() => history.push('/regulamin')}>Regulamin</li>
+                    </ul>
                 </div>
+                <div className="body-wrapper">
+                    <div className="hello-header">Witaj w ZaplacRecepte.pl</div>
+                    <div className="input-frame">
+                        <div className="hello-description">Aby w pełni móc korzystać z systemu, zaloguj się używając
+                            swojego
+                            emaila oraz hasła
+                        </div>
+                        <form>
+                            <label htmlFor="login">Login/Email</label>
+                            <input type="text" id="login" name="login"
+                                   placeholder="Nazwa gabinetu" onChange={e => setFormLogin(e.target.value)}/>
+                            <label htmlFor="password">Hasło</label>
+                            <input type="password" id="password" name="login"
+                                   placeholder="Hasło" onChange={e => setFormPassword(e.target.value)}/>
+                            <div className="after-input">
+                                <span className="error-label">*Podałeś nieprawidłowy email lub hasło</span>
+                                <span className="forgot-label">Zapomniałeś hasła?</span>
+                                <div className="remember-me">
+                                    <img src="loginPage/checkboxOn.png"/>
+                                    Zapamiętaj mnie
+                                </div>
+                            </div>
+                                   <input type="button" value="Zaloguj się"
+                                   onClick={() => login()}/>
+                        </form>
+                    </div>
+                </div>
+                <div className="login-footer">All rights reserved © copyright www.zaplacrecepte.pl 2020</div>
             </div>
-            <div className="login-footer">
-                <hr/>
-                <ul>
-                    <li onClick={() => history.push('/regulamin')}>Regulamin</li>
-                    <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
-                    <li onClick={() => history.push('/kontakt')}>Kontakt</li>
-                </ul>
+            <div className="main-image">
+                <img src="loginPage/Illustration bar.png"/>
             </div>
         </div>
     );
