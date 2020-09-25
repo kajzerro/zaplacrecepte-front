@@ -1,12 +1,10 @@
 /* BASIC */
+
 .login-page .login-header {
-    position: fixed;
-    width: 50%;
-    min-width: 1000px;
-    text-align: center;
+    margin-right: -80px;
 }
 
-.login-page .login-header li{
+.login-page .login-header li {
     display: inline-block;
     padding-left: 37.5px;
     padding-right: 37.5px;
@@ -20,27 +18,42 @@
     text-align: center;
     letter-spacing: 0.15px;
     color: #000000;
+
+
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.login-page .login-header ul{
+
+.login-page .login-header ul {
     padding-left: 0;
-    margin-left: 88px;
-    margin-top: 62px;
+    margin-top: 58px;
 }
 
-.login-page .login-header img{
+.login-page .login-header img {
+    margin-top: 5px;
+    width: 100%;
+    min-width: 190px;
+    max-width: 250px;
+
     position: absolute;
-    left: 58px;
-    top: 30px;
+
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .login-page .body-wrapper {
     position: relative;
-    margin-left: 25%;
-    margin-top: 142px;
-    width: 620px;
-    background: white;
-    padding: 20px;
+    margin-top: 66px;
+}
+
+@media (min-width: 1200px) {
+    .login-page .body-wrapper {
+        position: relative;
+        margin-top: 142px;
+    }
 }
 
 .login-page .hello-header {
@@ -50,6 +63,7 @@
     font-size: 48px;
     line-height: 63px;
     color: #2F4FA7;
+    width: 576px;
 }
 
 .login-page .hello-description {
@@ -143,7 +157,7 @@
 }
 
 .login-page .input-frame .after-input {
-margin-top: 8px;
+    margin-top: 8px;
 }
 
 .login-page .input-frame .remember-me {
@@ -158,42 +172,67 @@ margin-top: 8px;
     color: #6D6F8E;
 }
 
-.login-page .input-frame .remember-me img{
+.login-page .input-frame .remember-me img {
     margin-right: 13px;
     margin-top: -3px;
 }
 
 .login-page .login-footer {
-    margin-left: 25%;
-    width: 528px;
-    padding-left: 16px;
-    margin-top: 50px;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #80808061;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: white;
 
     font-family: Ubuntu;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 36px;
 
     color: #808080;
 }
 
-.login-page .left-site {
-    display: inline-block;
-    width: 50%;
-}
-
-.login-page .right-site {
-    display: inline-block;
-    width: 798px;
-    background-color: #e8f8ff;
+.login-page .main-image {
     position: absolute;
-    z-index: -1;
     top: 0;
-    height: 825px;
     right: 0;
+    height: 100%;
+    overflow: hidden;
 }
 
-.login-page .right-site img {
+.login-page .right-side {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.login-page .right-side img {
+    z-index: -1;
+    width: 100%;
+    max-width: 877px;
     float: right;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.login-page .right-side-bottom .inside {
+    background-color: #e8f8ff;
+    width: 91%;
+    height: 100%;
+    float: right;
+    max-width: 798px;
+}
+
+.login-page .right-side-bottom {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    z-index: -2;
 }
