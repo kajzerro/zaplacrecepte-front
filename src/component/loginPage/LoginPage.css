@@ -178,24 +178,6 @@
     margin-top: -3px;
 }
 
-.login-page .login-footer {
-    position: fixed;
-    bottom: 0;
-    border-top: 1px solid #80808061;
-    left: 0;
-    right: 0;
-    text-align: center;
-    background-color: white;
-
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 36px;
-
-    color: #808080;
-}
-
 .login-page .main-image {
     position: absolute;
     top: 0;
@@ -223,10 +205,9 @@
 
 .login-page .right-side-bottom .inside {
     background-color: #e8f8ff;
-    width: 91%;
     height: 100%;
-    float: right;
-    max-width: 798px;
+    margin-left: 9%;
+    margin-right: -100%;
 }
 
 .login-page .right-side-bottom {
