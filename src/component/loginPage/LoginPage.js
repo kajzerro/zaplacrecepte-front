@@ -21,14 +21,23 @@ function LoginPage() {
     }
 
     useEffect(() => {
-        const height = document.getElementById('login-page').clientHeight
-        if (height > window.innerHeight) {
-            setScalingStyle({
-                transform: "scale(" + window.innerHeight / height + ")",
-                transformOrigin: "top center"
-            });
+        function scaleForBadRatio() {
+            const height = document.getElementById('login-page').clientHeight
+            if (height > window.innerHeight) {
+                setScalingStyle({
+                    transform: "scale(" + window.innerHeight / height + ")",
+                    transformOrigin: "top center"
+                });
+            } else {
+                setScalingStyle({});
+            }
         }
 
+        scaleForBadRatio();
+        window.addEventListener('resize', scaleForBadRatio)
+        return _ => {
+            window.removeEventListener('resize', scaleForBadRatio)
+        };
     }, []);
 
     const [scalingStyle, setScalingStyle] = useState({});
@@ -61,7 +70,7 @@ function LoginPage() {
                     <div className="row">
                         <div className="col-6">
                             <div className="row body-wrapper">
-                                <div className="offset-1 col-11 offset-xl-3 col-xl-9">
+                                <div className="col-12 offset-xl-1 col-xl-11">
                                     <div className="hello-header">Witaj w ZaplacRecepte.pl</div>
                                     <div className="input-frame">
                                         <div className="hello-description">Aby w pełni móc korzystać z systemu, zaloguj
