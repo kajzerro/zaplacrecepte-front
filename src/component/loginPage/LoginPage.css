@@ -28,6 +28,7 @@
 .login-page .login-header ul {
     padding-left: 0;
     margin-top: 58px;
+    min-width: 360px;
 }
 
 .login-page .login-header img {
