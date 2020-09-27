@@ -51,7 +51,7 @@
 }
 
 .login-page .body-wrapper {
-    width: 412px;
+    width: 430px;
     margin: 0;
     position: absolute;
     top: 50%;
@@ -165,7 +165,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 24px;
     /* identical to box height, or 133% */
     letter-spacing: 0.4px;
     color: #E21717;
