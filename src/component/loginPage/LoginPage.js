@@ -36,7 +36,7 @@ function LoginPage() {
                                 <div className="col-12">
                                     <div className="row login-header">
                                         <div className="col-4">
-                                            <img src="loginPage/logo.png"/>
+                                            <img src="loginPage/logo.svg"/>
                                         </div>
                                         <div className="col-8">
                                             <ul>
@@ -52,14 +52,11 @@ function LoginPage() {
                                 <div className="col-12 offset-xl-1 col-xl-11">
                                     <div className="hello-header">Witaj w ZaplacRecepte.pl</div>
                                     <div className="input-frame">
-                                        <div className="hello-description">Aby w pełni móc korzystać z systemu, zaloguj
-                                            się
-                                            używając
-                                            swojego
-                                            emaila oraz hasła
+                                        <div className="hello-description">Zaloguj się podając e-mail i hasło, aby w
+                                            pełni korzystać z aplikacji.
                                         </div>
                                         <form>
-                                            <label htmlFor="login">Login/Email</label>
+                                            <label htmlFor="login">Email</label>
                                             <input type="text" id="login" name="login"
                                                    placeholder="Nazwa gabinetu"
                                                    onChange={e => setFormLogin(e.target.value)}/>
@@ -75,7 +72,9 @@ function LoginPage() {
                                                     Zapamiętaj mnie
                                                 </div>
                                             </div>
-                                            <input type="button" value="Zaloguj się"
+                                            <input className="login-button" type="button" value="Zaloguj się"
+                                                   onClick={() => login()}/>
+                                            <input className="register-button" type="button" value="Zarejestruj się"
                                                    onClick={() => login()}/>
                                         </form>
                                     </div>
