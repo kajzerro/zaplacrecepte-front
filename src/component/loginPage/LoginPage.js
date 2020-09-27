@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import './LoginPage.css';
 import axios from 'axios';
@@ -20,26 +20,6 @@ function LoginPage() {
             .catch(err => alert(err));
     }
 
-    useEffect(() => {
-        function scaleForBadRatio() {
-            const height = document.getElementById('login-page').clientHeight
-            if (height > window.innerHeight) {
-                setScalingStyle({
-                    transform: "scale(" + window.innerHeight / height + ")",
-                    transformOrigin: "top center"
-                });
-            } else {
-                setScalingStyle({});
-            }
-        }
-
-        scaleForBadRatio();
-        window.addEventListener('resize', scaleForBadRatio)
-        return _ => {
-            window.removeEventListener('resize', scaleForBadRatio)
-        };
-    }, []);
-
     const [scalingStyle, setScalingStyle] = useState({});
 
     const [formLogin, setFormLogin] = useState("");
@@ -47,28 +27,27 @@ function LoginPage() {
 
     let history = useHistory();
     return (
-        <div className="blocked-scrolling">
-            <div id="login-page" className="login-page"
-                 style={scalingStyle}>
+        <div>
+            <div className="login-page">
                 <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-6 col-xs-12">
-                            <div className="row login-header">
-                                <div className="col-4">
-                                    <img src="loginPage/logo.png"/>
-                                </div>
-                                <div className="col-8">
-                                    <ul>
-                                        <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
-                                        <li onClick={() => history.push('/kontakt')}>Kontakt</li>
-                                        <li onClick={() => history.push('/regulamin')}>Regulamin</li>
-                                    </ul>
+                    <div className="row fullscreen">
+                        <div className="col-6">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="row login-header">
+                                        <div className="col-4">
+                                            <img src="loginPage/logo.png"/>
+                                        </div>
+                                        <div className="col-8">
+                                            <ul>
+                                                <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
+                                                <li onClick={() => history.push('/kontakt')}>Kontakt</li>
+                                                <li onClick={() => history.push('/regulamin')}>Regulamin</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-6">
                             <div className="row body-wrapper">
                                 <div className="col-12 offset-xl-1 col-xl-11">
                                     <div className="hello-header">Witaj w ZaplacRecepte.pl</div>
@@ -104,15 +83,13 @@ function LoginPage() {
                             </div>
                         </div>
                         <div className="col-6 right-side">
+                            <div className="background"/>
                             <img src="loginPage/loginImage.png"/>
                         </div>
+                        <div className="login-footer">
+                            All rights reserved © copyright www.zaplacrecepte.pl 2020
+                        </div>
                     </div>
-                </div>
-                <div className="right-side-bottom">
-                    <div className="inside"/>
-                </div>
-                <div className="login-footer">
-                    All rights reserved © copyright www.zaplacrecepte.pl 2020
                 </div>
             </div>
         </div>
