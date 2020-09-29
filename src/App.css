@@ -34,26 +34,56 @@
     color: #808080;
 }
 
-.patient-list-table {
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
-    margin-bottom: 50px;
-    color: #636363;
-}
-
-.patient-list-table > .row {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.patient-spinner {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.patient-row-wrapper {
+.zr-red-button {
     width: 100%;
+    height: 40px;
+    display: block;
+    border: 1px solid #DE3500;
+    background: #DE3500;
+    border-radius: 4px;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #FFFFFF;
+}
+
+.zr-red-button:hover {
+    border: 1px solid #f63700;
+    background: #F63700;
+    color: #FFFFFF;
+}
+
+h1.zr-header {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 39px;
+    line-height: 58px;
+    color: #2F4FA7;
+}
+
+h2.zr-header {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 63px;
+    color: #2F4FA7;
+}
+
+.zr-header-description {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    color: #676767;
+    margin-top: 0px;
+    margin-bottom: 3px;
 }
 
 .patient-row {
@@ -93,11 +123,6 @@
 
 .patient-list .add-person button{
     padding: 20px;
-}
-
-.patient-row button.patient-button {
-    border-radius: 10px;
-    opacity: 1;
 }
 
 .patient-add-button {
@@ -234,4 +259,195 @@
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
+}
+
+
+.search-header {
+    border-bottom: 1px solid #AAC9D7;
+    height: 82px;
+}
+
+.search-header .container,
+.search-header .row {
+    height: 100%;
+}
+
+.to-bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+.search-header span {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+
+    /* identical to box height, or 171% */
+    text-align: center;
+    letter-spacing: 0.15px;
+
+    color: #265892;
+
+}
+
+.search-header button {
+    border: 1px solid #AAC9D7;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background: white;
+    right: 8px;
+}
+
+.search-header button img {
+    padding: 5px;
+}
+
+.search-header input[type=text] {
+    background: #F5F5F5;
+    border-radius: 10px;
+
+    width: 100%;
+    height: 49px;
+    display: block;
+    border: 0;
+    text-indent: 15px;
+
+    /* Subtitle 1 */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #676767;
+}
+
+.list-page {
+    background: #EDF6FA;
+    padding-bottom: 70px;
+    position: relative;
+}
+
+.list-page .select span {
+    position: absolute;
+    height: 20px;
+    left: 5.2%;
+    right: 59.57%;
+    top: calc(50% - 20px / 2);
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    /* identical to box height, or 125% */
+    letter-spacing: 0.25px;
+
+    color: #65696E;
+
+
+}
+
+.list-page .functional-top .select {
+    position: relative;
+    margin-top: 8px;
+    height: 48px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+
+    /* identical to box height, or 125% */
+    letter-spacing: 0.25px;
+
+    color: #65696E;
+    background: #FFFFFF;
+}
+
+.list-page .functional-top {
+    position: absolute;
+    bottom: 0;
+    padding-right: 25px;
+}
+
+.list-page .functional-top .zr-red-button {
+    height: 56px;
+}
+
+.list-page .table-header {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    letter-spacing: 0.15px;
+
+    color: #65696E;
+}
+
+.list-page .patient-row-wrapper {
+    background: #FFFFFF;
+    border: 1px solid #E0E8EC;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 36px;
+
+    /* identical to box height, or 180% */
+    letter-spacing: 0.15px;
+
+    color: #2F4FA7;
+}
+
+.list-page .patient-row-wrapper span {
+    line-height: 52px;
+}
+
+.list-page .status-button {
+    border: 2px solid #A8A8A8;
+    background-color: #A8A8A8;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 36px;
+
+    letter-spacing: 1.15px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.list-page .status-button.blue {
+    border: 2px solid #00B0FF;
+    background-color: #00B0FF;
+}
+
+.list-page .status-button.green {
+    border: 2px solid #3EBB2A;
+    background-color: #3EBB2A;
+}
+
+.list-page .status-button.red {
+    border: 2px solid #ee5454;
+    background-color: #ee5454;
+}
+
+.list-page .patient-spinner {
+    color: #00B0FF;
 }

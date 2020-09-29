@@ -36,7 +36,7 @@ function LoginPage() {
                                 <div className="col-12">
                                     <div className="row login-header">
                                         <div className="col-4">
-                                            <img src="loginPage/logo.svg"/>
+                                            <img src="logo.svg"/>
                                         </div>
                                         <div className="col-8">
                                             <ul>
@@ -50,9 +50,9 @@ function LoginPage() {
                             </div>
                             <div className="row body-wrapper">
                                 <div className="col-12 offset-xl-1 col-xl-11">
-                                    <div className="hello-header">Witaj w ZaplacRecepte.pl</div>
+                                    <h1 className="zr-header">Witaj w ZaplacRecepte.pl</h1>
                                     <div className="input-frame">
-                                        <div className="hello-description">Zaloguj się podając e-mail i hasło, aby w
+                                        <div className="zr-header-description">Zaloguj się podając e-mail i hasło, aby w
                                             pełni korzystać z aplikacji.
                                         </div>
                                         <form>
@@ -72,7 +72,7 @@ function LoginPage() {
                                                     Zapamiętaj mnie
                                                 </div>
                                             </div>
-                                            <input className="login-button" type="button" value="Zaloguj się"
+                                            <input className="zr-red-button" type="button" value="Zaloguj się"
                                                    onClick={() => login()}/>
                                             <input className="register-button" type="button" value="Zarejestruj się"
                                                    onClick={() => login()}/>

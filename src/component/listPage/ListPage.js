@@ -31,7 +31,7 @@ function ListPage() {
         setCheckAll(false);
     };
     const handleAddSave = () => {
-        if(newPrescriptionData.allValid) {
+        if (newPrescriptionData.allValid) {
             setSavingInProgress(true);
             axios.post(getEndpoint() + "/api/prescriptions/",
                 newPrescriptionData)
@@ -44,8 +44,7 @@ function ListPage() {
                     setSavingInProgress(false);
                     setCheckAll(false);
                 });
-        }
-        else {
+        } else {
             setCheckAll(true);
         }
     };
@@ -67,14 +66,6 @@ function ListPage() {
         setSelectedRowData(data);
         setShowEditModal(true);
         setEditedPrescriptionNumber(data.prescriptionNumber);
-    };
-    const createFirstLastClassName = (collection, index) => {
-        if (index === 0) {
-            return "first";
-        } else if (collection.length - 1 === index) {
-            return "last"
-        }
-        return "";
     };
 
     function fetchData() {
@@ -104,7 +95,7 @@ function ListPage() {
 
     useEffect(() => {
         fetchData();
-        const id = setInterval(fetchData, 60*1000);
+        const id = setInterval(fetchData, 60 * 1000);
         return () => clearInterval(id);
     }, []);
 
@@ -112,32 +103,105 @@ function ListPage() {
 
     return (
         <>
-            <div className="patient-list container">
-                <div className="row">
-                    <div className="offset-1 col-10">
-                        <div className="row">
-                            <div className="add-person offset-2 col-8">
-                                <button type="button" className="btn btn-outline-success btn-block patient-add-button"
-                                        onClick={() => setShowAddModal(true)}>Dodaj recepte
+            <div>
+                <div className="search-header">
+                    <div className="container">
+                        <div className="row pb-2">
+                            <div className="col-3">
+                                <img className="to-bottom" src="logo.svg"/>
+                            </div>
+                            <div className="col-6">
+                                <input className="to-bottom" type="text" id="search" name="search"
+                                       placeholder="Szukaj pacjenta"/>
+                            </div>
+                            <div className="col-3">
+                                <button className="to-bottom">
+                                    <img src="listPage/awatar.png"/>
+                                    <span>
+                                Dr. Hugh House
+                                </span>
                                 </button>
                             </div>
-                            {isLoading &&
-                            <div className="text-center patient-spinner">
+                        </div>
+                    </div>
+                </div>
+                <div className="list-page">
+                    <div className="container">
+                        <div className="row mb-5">
+                            <div className="col-5 mt-2">
+                                <h2 className="zr-header">
+                                    Recepty
+                                </h2>
+                                <div className="zr-header-description">
+                                    Sprawdź status oraz szczegóły wystawionych recept
+                                </div>
+                            </div>
+                            <div className="col-7">
+                                <div className="container-fluid functional-top">
+                                    <div className="row">
+                                        <div className="col-3">
+                                            <div className="select">
+                                    <span>
+                                    Lista
+                                    </span>
+                                            </div>
+                                        </div>
+                                        <div className="col-4">
+                                            <div className="select">
+                                    <span>
+                                    Sortowanie
+                                    </span>
+                                            </div>
+                                        </div>
+                                        <div className="col-5">
+                                            <button type="button"
+                                                    className="btn btn-block zr-red-button"
+                                                    onClick={() => setShowAddModal(true)}>+&nbsp;&nbsp;Wystaw recepte
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="row table-header">
+                            <div className="col-2">
+                                Data
+                            </div>
+                            <div className="col-3">
+                                Imię i nazwisko
+                            </div>
+                            <div className="col-2">
+                                Pesel
+                            </div>
+                            <div className="col-2">
+                                Kod pocztowy
+                            </div>
+                            <div className="col-3">
+                                Status
+                            </div>
+                        </div>
+                        {prescriptionsData.map((row, index) => (
+                            <ListRow key={row.id} prescription={row} onClick={() => {
+                                handleEditShow(row)
+                            }}/>
+                        ))}
+
+                        {isLoading &&
+                        <div className="row">
+                            <div className="col-12 text-center patient-spinner mt-4 mb-4">
                                 <div className="spinner-border" role="status">
                                     <span className="sr-only">Loading...</span>
                                 </div>
                             </div>
-                            }
+                        </div>
+                        }
+
+                        <div className="login-footer">
+                            All rights reserved © copyright www.zaplacrecepte.pl 2020
                         </div>
                     </div>
-                </div>
-                <div className="patient-list-table">
-                    {prescriptionsData.map((row, index) => (
-                        <ListRow key={row.id} prescription={row}
-                                 className={createFirstLastClassName(prescriptionsData, index)} onClick={() => {
-                            handleEditShow(row)
-                        }}/>
-                    ))}
+
                 </div>
             </div>
             <Modal show={showAddModal} onHide={handleClose} animation={false}>
@@ -145,7 +209,7 @@ function ListPage() {
                     <Modal.Title>Dodawanie recepty</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll} />
+                    <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
@@ -191,7 +255,8 @@ function ListPage() {
                             </button>
                             }
                             <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
-                            <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData} copyPeselButton/>
+                            <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}
+                                                copyPeselButton/>
                         </>
                     }
                 </Modal.Body>

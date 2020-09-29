@@ -60,25 +60,11 @@
     margin-top: 20px;
 }
 
-.login-page .hello-header {
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 39px;
-    line-height: 58px;
-    color: #2F4FA7;
+.login-page .zr-header {
     width: 576px;
 }
 
-.login-page .hello-description {
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 24px;
-    color: #676767;
-    margin-top: 0px;
-    margin-bottom: 3px;
+.login-page .zr-header-description {
     width: 576px;
 }
 
@@ -109,23 +95,6 @@
     line-height: 24px;
     letter-spacing: 0.15px;
     color: #676767;
-}
-
-.login-page input[type=button].login-button {
-    width: 100%;
-    height: 40px;
-    display: block;
-    border: 1px solid #DE3500;
-    background: #DE3500;
-    border-radius: 4px;
-
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.15px;
-    color: #FFFFFF;
 }
 
 .login-page input[type=button].register-button {
