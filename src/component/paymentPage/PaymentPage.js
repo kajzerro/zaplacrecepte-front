@@ -49,7 +49,7 @@ function PaymentPage() {
 
                         <ZrInput
                             label={"Imię i nazwisko"}
-                            value={clientData.firstName + " " + clientData.lastName}
+                            value={clientData.firstName ? clientData.firstName + " " + clientData.lastName : ""}
                         />
                         <ZrInput
                             label={"Pesel"}
