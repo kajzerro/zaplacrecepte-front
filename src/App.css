@@ -517,6 +517,9 @@ h3.zr-header {
 }
 
 .payment-page .body-wrapper {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    z-index: 1;
     padding: 2%;
     max-width: 480px;
     width: 90%;
