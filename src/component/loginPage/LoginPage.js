@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import './LoginPage.css';
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
+import Footer from '../common/Footer';
 
 function LoginPage() {
 
@@ -85,9 +86,7 @@ function LoginPage() {
                             <div className="background"/>
                             <img src="loginPage/loginImage.png"/>
                         </div>
-                        <div className="login-footer">
-                            All rights reserved © copyright www.zaplacrecepte.pl 2020
-                        </div>
+                        <Footer/>
                     </div>
                 </div>
             </div>

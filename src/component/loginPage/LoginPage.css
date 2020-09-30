@@ -1,10 +1,5 @@
 /* BASIC */
 
-.login-page .fullscreen {
-    min-height: 100vh;
-    position: relative;
-}
-
 .login-page .login-header {
     margin-right: -80px;
 }

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
-import PrescriptionFields from '../common/PrescriptionFields';
+import Footer from '../common/Footer';
 import {useParams} from 'react-router-dom'
 import axios from "axios";
 import {getEndpoint} from "../config/Config";
+import ZrInput from "../common/ZrInput";
 
 function PaymentPage() {
 
@@ -36,15 +37,37 @@ function PaymentPage() {
                 </h4>
             </div>
             :
-            <div className="container payment-page">
-                <div className="row mb-lg-5 mt-3 mb-sm-2">
-                    <h4 className="text-center">Szczegóły Twojego zamówienia sporządzonego przez
-                        gabinet Dr Marka Krzystyniaka</h4>
-                </div>
-                <div className="row">
-                    <div className="offset-lg-3 col-lg-6 offset-sm-12 col-sm-12">
-                        <PrescriptionFields disabled={true} key={clientData.id} onChange={() => {
-                        }} initData={clientData} checkAll={false}/>
+            <div className="payment-page">
+                <div className="fullscreen">
+                    <div className={"header d-none d-sm-block"}>
+                        <img src="/logo.svg"/>
+                    </div>
+                    <div className="body-wrapper">
+                        <h3 className="zr-header">
+                            Opłać receptę
+                        </h3>
+
+                        <ZrInput
+                            label={"Imię i nazwisko"}
+                            value={clientData.firstName + " " + clientData.lastName}
+                        />
+                        <ZrInput
+                            label={"Pesel"}
+                            value={clientData.pesel}
+                        />
+                        <ZrInput
+                            label={"Kod pocztowy"}
+                            value={clientData.postalCode}
+                        />
+                        <ZrInput
+                            label={"Leki na recepcie"}
+                            value={clientData.remarks}
+                        />
+                        <ZrInput
+                            label={"Numer telefonu"}
+                            value={clientData.phoneNumber}
+                        />
+
                         <Form.Check
                             className="mb-4 mt-4"
                             type="checkbox"
@@ -55,18 +78,17 @@ function PaymentPage() {
                                                   console.log(e.target.checked);
                                                   setAccepted(e.target.checked);
                                               }}/>
-                            <Form.Check.Label>Oświadczam, że zapoznałem/am się z <a href="/regulamin">regulaminem</a> i
-                                akceptuje go</Form.Check.Label>
+                            <Form.Check.Label className={"declaration"}>Oświadczam, że zapoznałem/am się z <a
+                                href="/regulamin">regulaminem.</a></Form.Check.Label>
                         </Form.Check>
                         <a href={clientData.orderUrl}>
-                            <button className="mb-3 btn btn-success btn-block patient-button" disabled={!accepted}
+                            <button className="mb-3 btn btn-block zr-red-button" disabled={!accepted}
                                     onClick={handlePay}>
-                                Akceptuj zamówienie i przejdź do płatności
+                                Akceptuję receptę i płacę
                             </button>
                         </a>
                     </div>
-                </div>
-                <div className="row">
+                    <Footer/>
                 </div>
             </div>
     );
