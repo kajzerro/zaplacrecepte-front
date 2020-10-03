@@ -565,6 +565,7 @@ h3.zr-header {
 
 .search-header button img {
     padding: 5px;
+    height: 35px;
 }
 
 .search-header input[type=text] {
