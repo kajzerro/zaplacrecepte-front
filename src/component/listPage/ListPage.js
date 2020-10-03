@@ -41,6 +41,10 @@ function ListPage() {
         setShowEditModal(false);
         setCheckAll(false);
     };
+    const handleLogout = () => {
+        axios.get(getEndpoint() + "/api/logout")
+            .finally(() => history.push('/'));
+    };
     const handleAddSave = () => {
         if (newPrescriptionData.allValid) {
             setSavingInProgress(true);
@@ -139,10 +143,10 @@ function ListPage() {
                                        placeholder="Szukaj pacjenta"/>
                             </div>
                             <div className="col-3">
-                                <button className="to-bottom">
+                                <button className="to-bottom" onClick={handleLogout}>
                                     <img src="listPage/awatar.png"/>
                                     <span>
-                                Dr Krzystyniak
+                                Wyloguj
                                 </span>
                                 </button>
                             </div>
