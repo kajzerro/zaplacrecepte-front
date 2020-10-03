@@ -31,6 +31,14 @@ function ListPage() {
         show: false, onClose: () => {
         }, message: ""
     });
+    const [searchPatientQuery, setSearchPatientQuery] = useState("");
+
+    const searchPatientFilter = (patientData) => {
+        return searchPatientQuery === "" ||
+            patientData.firstName.toUpperCase().includes(searchPatientQuery.toUpperCase()) ||
+            patientData.lastName.toUpperCase().includes(searchPatientQuery.toUpperCase()) ||
+            patientData.pesel.toUpperCase().includes(searchPatientQuery.toUpperCase());
+    };
 
     const showAlert = (properties) => {
         setErrorAlert({...properties, key: Math.random()});
@@ -140,7 +148,8 @@ function ListPage() {
                             </div>
                             <div className="col-6">
                                 <input className="to-bottom" type="text" id="search" name="search"
-                                       placeholder="Szukaj pacjenta"/>
+                                       placeholder="Szukaj pacjenta" value={searchPatientQuery}
+                                       onChange={e => setSearchPatientQuery(e.target.value)}/>
                             </div>
                             <div className="col-3">
                                 <button className="to-bottom" onClick={handleLogout}>
@@ -209,7 +218,7 @@ function ListPage() {
                                 Status
                             </div>
                         </div>
-                        {prescriptionsData.map((row, index) => (
+                        {prescriptionsData.filter(p => searchPatientFilter(p)).map((row, index) => (
                             <ListRow key={row.id} prescription={row} onClick={() => {
                                 handleEditShow(row)
                             }}/>
