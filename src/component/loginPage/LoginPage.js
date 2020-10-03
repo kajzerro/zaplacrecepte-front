@@ -18,13 +18,17 @@ function LoginPage() {
             .then(() => {
                 history.push('/lista');
             })
-            .catch(err => alert(err));
+            .catch(err => {
+                setWrongUserOrPassword(true);
+                console.error(err)
+            });
     }
 
     const [scalingStyle, setScalingStyle] = useState({});
 
     const [formLogin, setFormLogin] = useState("");
     const [formPassword, setFormPassword] = useState("");
+    const [wrongUserOrPassword, setWrongUserOrPassword] = useState(false);
 
     let history = useHistory();
     return (
@@ -56,17 +60,22 @@ function LoginPage() {
                                         <div className="zr-header-description">Zaloguj się podając e-mail i hasło, aby w
                                             pełni korzystać z aplikacji.
                                         </div>
-                                        <form>
+                                        <form className={wrongUserOrPassword ? "wrong-user-or-password" : ""}>
                                             <label htmlFor="login">Email</label>
                                             <input type="text" id="login" name="login"
                                                    placeholder="Nazwa gabinetu"
-                                                   onChange={e => setFormLogin(e.target.value)}/>
+                                                   onChange={e => {
+                                                       setWrongUserOrPassword(false);
+                                                       setFormLogin(e.target.value);
+                                                   }}/>
                                             <label htmlFor="password">Hasło</label>
                                             <input type="password" id="password" name="login"
-                                                   placeholder="Hasło" onChange={e => setFormPassword(e.target.value)}/>
+                                                   placeholder="Hasło" onChange={e => {
+                                                setWrongUserOrPassword(false);
+                                                setFormPassword(e.target.value);
+                                            }}/>
                                             <div className="after-input">
-                                                <span
-                                                    className="error-label">*Podałeś nieprawidłowy email lub hasło</span>
+                                                {wrongUserOrPassword && <span className="error-label">*Podałeś nieprawidłowy email lub hasło</span>}
                                                 <span className="forgot-label">Zapomniałeś hasła?</span>
                                                 <div className="remember-me">
                                                     <img src="loginPage/checkboxOn.png"/>

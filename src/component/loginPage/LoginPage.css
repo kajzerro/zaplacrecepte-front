@@ -92,6 +92,15 @@
     color: #676767;
 }
 
+.login-page .wrong-user-or-password label {
+    color: #E21717;
+}
+
+.login-page .wrong-user-or-password input[type=text], .login-page .wrong-user-or-password input[type=password] {
+    border: 1px solid #E21717;
+    color: #E21717;
+}
+
 .login-page input[type=button].register-button {
     margin-top: 8px;
     width: 100%;
