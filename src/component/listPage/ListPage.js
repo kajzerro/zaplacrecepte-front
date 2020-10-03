@@ -8,9 +8,8 @@ import ZrCheckbox from '../common/ZrCheckbox';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
 import moment from 'moment-timezone';
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
 import ZrStatusButton from '../common/ZrStatusButton';
+import ZrInput from "../common/ZrInput";
 
 function ListPage() {
 
@@ -18,12 +17,12 @@ function ListPage() {
     const [savingInProgress, setSavingInProgress] = useState(false);
     const [prescriptionsData, setPrescriptionsData] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(true);
     const [newPrescriptionData, setNewPrescriptionData] = useState({});
     const [editedPrescriptionData, setEditedPrescriptionData] = useState({});
     const [editedStatus, setEditedStatus] = useState("");
     const [selectedRowData, setSelectedRowData] = useState({});
-    const [inRealizationState, setInRealizationState] = useState(false);
+    const [inRealizationState, setInRealizationState] = useState(true);
     const [editedPrescriptionNumber, setEditedPrescriptionNumber] = useState("");
     const [checkAll, setCheckAll] = useState(false);
     const [useDefaultEmail, setUseDefaultEmail] = useState(true);
@@ -234,22 +233,21 @@ function ListPage() {
             <Modal show={showEditModal} onHide={handleClose} animation={false}
                    dialogClassName={"list-page-modal edit-prescription"}>
                 <Modal.Header>
-                    <Modal.Title><h4 className="zr-header">Szczegóły recepty</h4></Modal.Title>
+                    <Modal.Title>
+                        {!inRealizationState && <h4 className="zr-header">Szczegóły recepty</h4>}
+                        {inRealizationState && <h4 className="zr-header">Realizacja recepty</h4>}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {
                         (inRealizationState || selectedRowData.status === "COMPLETED") &&
-                        <InputGroup className="mb-3">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="inputGroup-sizing-default">Numer recepty</InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl
-                                value={editedPrescriptionNumber}
-                                onChange={e => setEditedPrescriptionNumber(e.target.value)}
-                                placeholder="Numer recepty"
-                                aria-describedby="inputGroup-sizing-default"
-                            />
-                        </InputGroup>
+                        <ZrInput
+                            label={"Kod recepty"}
+                            placeholder={"Kod wystawionej recepty"}
+                            className="mb-3"
+                            value={editedPrescriptionNumber}
+                            onChange={e => setEditedPrescriptionNumber(e.target.value)}
+                        />
                     }
                     {
                         !inRealizationState &&
@@ -273,21 +271,28 @@ function ListPage() {
                 <Modal.Footer>
                     {
                         !inRealizationState &&
-                        <button className="btn btn-secondary" onClick={handleClose}>
-                            Zamknij
-                        </button>
+                        <>
+                            <button className="btn btn-secondary" onClick={handleClose}>
+                                Zamknij
+                            </button>
+                            <button className="btn zr-red-button save-button" onClick={handleEditSave}>
+                                Zapisz zmiany
+                            </button>
+                        </>
                     }
                     {
                         inRealizationState &&
-                        <button className="btn btn-secondary" onClick={() => {
-                            setInRealizationState(false)
-                        }}>
-                            Wstecz
-                        </button>
+                        <>
+                            <button className="btn btn-secondary" onClick={() => {
+                                setInRealizationState(false)
+                            }}>
+                                Wstecz
+                            </button>
+                            <button className="btn zr-blue-button save-button" onClick={handleEditSave}>
+                                Zrealizuj receptę
+                            </button>
+                        </>
                     }
-                    <button className="btn zr-red-button save-button" onClick={handleEditSave}>
-                        Zapisz zmiany
-                    </button>
                 </Modal.Footer>
             </Modal>
         </>
