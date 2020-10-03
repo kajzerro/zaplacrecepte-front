@@ -22,7 +22,7 @@ function ListRow(props) {
                 <div className="mb-3 container zr-status-change-unwrapped">
                     <div className="row">
                         <div className="col-3">
-                            <div className={"status green"}
+                            <div className={"status blue"}
                                  onClick={() => {
                                      setFormStatus("COMPLETED");
                                      setUnwrapped(false);
@@ -34,7 +34,7 @@ function ListRow(props) {
                             </div>
                         </div>
                         <div className="col-3">
-                            <div className={"status blue"}
+                            <div className={"status green"}
                                  onClick={() => {
                                      setFormStatus("WAITING_FOR_CONFIRMATION");
                                      setUnwrapped(false);
