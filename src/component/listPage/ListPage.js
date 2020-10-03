@@ -142,7 +142,7 @@ function ListPage() {
                                 <button className="to-bottom">
                                     <img src="listPage/awatar.png"/>
                                     <span>
-                                Dr. Hugh House
+                                Dr Krzystyniak
                                 </span>
                                 </button>
                             </div>

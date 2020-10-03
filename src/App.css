@@ -528,6 +528,7 @@ h3.zr-header {
 .search-header {
     border-bottom: 1px solid #AAC9D7;
     height: 82px;
+    background: #FFFFFF;
 }
 
 .search-header .container,
