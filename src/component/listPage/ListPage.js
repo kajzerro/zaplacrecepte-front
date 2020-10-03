@@ -10,6 +10,7 @@ import {useHistory} from "react-router-dom";
 import moment from 'moment-timezone';
 import ZrStatusButton from '../common/ZrStatusButton';
 import ZrInput from "../common/ZrInput";
+import ZrErrorModal from "../common/ZrErrorModal";
 
 function ListPage() {
 
@@ -17,15 +18,23 @@ function ListPage() {
     const [savingInProgress, setSavingInProgress] = useState(false);
     const [prescriptionsData, setPrescriptionsData] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(true);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [newPrescriptionData, setNewPrescriptionData] = useState({});
     const [editedPrescriptionData, setEditedPrescriptionData] = useState({});
     const [editedStatus, setEditedStatus] = useState("");
     const [selectedRowData, setSelectedRowData] = useState({});
-    const [inRealizationState, setInRealizationState] = useState(true);
+    const [inRealizationState, setInRealizationState] = useState(false);
     const [editedPrescriptionNumber, setEditedPrescriptionNumber] = useState("");
     const [checkAll, setCheckAll] = useState(false);
     const [useDefaultEmail, setUseDefaultEmail] = useState(true);
+    const [errorAlert, setErrorAlert] = useState({
+        show: false, onClose: () => {
+        }, message: ""
+    });
+
+    const showAlert = (properties) => {
+        setErrorAlert({...properties, key: Math.random()});
+    };
 
     const handleClose = () => {
         setShowAddModal(false);
@@ -41,7 +50,12 @@ function ListPage() {
                     fetchData();
                     setShowAddModal(false);
                 })
-                .catch(err => alert(err))
+                .catch(err =>
+                    showAlert({
+                        show: true, onClose: () => {
+                        }, message: "Wystąpił błąd zapisu - skontaktuj się z administratorem."
+                    })
+                )
                 .finally(() => {
                     setSavingInProgress(false);
                     setCheckAll(false);
@@ -58,7 +72,12 @@ function ListPage() {
                 fetchData();
                 setShowEditModal(false);
             })
-            .catch(err => alert(err))
+            .catch(err =>
+                showAlert({
+                    show: true, onClose: () => {
+                    }, message: "Wystąpił błąd zapisu - skontaktuj się z administratorem."
+                })
+            )
             .finally(() => {
                 setSavingInProgress(false);
             });
@@ -87,8 +106,11 @@ function ListPage() {
                 setPrescriptionsData(res.data);
             })
             .catch(err => {
-                alert(err);
-                history.push('/');
+                showAlert({
+                    show: true,
+                    onClose: () => history.push('/'),
+                    message: "Aby wyświetlić strone należy się zalogować"
+                });
             })
             .finally(() => {
                 setIsLoading(false);
@@ -222,7 +244,7 @@ function ListPage() {
                     <button className="btn btn-secondary" onClick={handleClose}>
                         Zamknij
                     </button>
-                    <div className="patient-blocking-button save-button">
+                    <div className="patient-blocking-button half-width-button">
                         <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
                         <button className="btn zr-red-button" onClick={handleAddSave} disabled={savingInProgress}>
                             Zapisz i dodaj recepte
@@ -275,9 +297,13 @@ function ListPage() {
                             <button className="btn btn-secondary" onClick={handleClose}>
                                 Zamknij
                             </button>
-                            <button className="btn zr-red-button save-button" onClick={handleEditSave}>
-                                Zapisz zmiany
-                            </button>
+                            <div className="patient-blocking-button half-width-button">
+                                <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
+                                <button className="btn zr-red-button" onClick={handleEditSave}
+                                        disabled={savingInProgress}>
+                                    Zapisz zmiany
+                                </button>
+                            </div>
                         </>
                     }
                     {
@@ -288,13 +314,19 @@ function ListPage() {
                             }}>
                                 Wstecz
                             </button>
-                            <button className="btn zr-blue-button save-button" onClick={handleEditSave}>
-                                Zrealizuj receptę
-                            </button>
+                            <div className="patient-blocking-button half-width-button">
+                                <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
+                                <button className="btn zr-blue-button" onClick={handleEditSave}
+                                        disabled={savingInProgress}>
+                                    Zrealizuj receptę
+                                </button>
+                            </div>
                         </>
                     }
                 </Modal.Footer>
             </Modal>
+            <ZrErrorModal show={errorAlert.show} onClose={errorAlert.onClose} message={errorAlert.message}
+                          key={errorAlert.key}/>
         </>
 
 

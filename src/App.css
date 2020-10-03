@@ -741,7 +741,7 @@ h3.zr-header {
     height: 56px;
 }
 
-.list-page-modal .modal-footer .save-button {
+.list-page-modal .modal-footer .half-width-button {
     width: 50%;
     margin-left: 10px;
 }
@@ -761,6 +761,10 @@ h3.zr-header {
 .list-page-modal .status-button {
     line-height: 24px;
     margin-bottom: 16px;
+}
+
+.zr-error-modal {
+    max-width: 460px;
 }
 
 .payment-page {
