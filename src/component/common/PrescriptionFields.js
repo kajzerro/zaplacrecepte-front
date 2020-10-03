@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
 import * as EmailValidator from 'email-validator';
 import {validatePolish} from 'validate-polish';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import ZrInput from './ZrInput';
 
 function ListRow(props) {
 
@@ -53,7 +52,7 @@ function ListRow(props) {
     const [formPhoneNumberValid, setFormPhoneNumberValid] = useState(isPhoneNumberValid(formPhoneNumber));
     const [formPhoneNumberChanged, setFormPhoneNumberChanged] = useState(false);
 
-    const [formEmail, setFormEmail] = useState(props.initData.email || "krzyampagabinet@outlook.com");
+    const [formEmail, setFormEmail] = useState(props.initData.email || "");
     const [formEmailValid, setFormEmailValid] = useState(isEmailValid(formEmail));
     const [formEmailChanged, setFormEmailChanged] = useState(false);
 
@@ -103,47 +102,50 @@ function ListRow(props) {
         }
     }, [checkAll]);
 
+
+    useEffect(() => {
+        if (props.useDefaultEmail) {
+            setFormEmail("krzyampagabinet@outlook.com");
+            setFormEmailValid(true);
+        }
+    }, [props.useDefaultEmail]);
+
     return (
         <>
-            <InputGroup className={"mb-3 " + (formFirstNameChanged && !formFirstNameValid ? "patient-input-invalid" : "")}>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Imię</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    disabled={props.disabled}
-                    value={formFirstName}
-                    onChange={e => {
-                        setFormFirstNameValid(isNotEmpty(e.target.value));
-                        setFormFirstName(e.target.value);
-                    }}
-                    onBlur={() => setFormFirstNameChanged(true)}
-                    placeholder="Imię pacjenta"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-                <div className="patient-input-error-message">Imię nie może być puste</div>
-            </InputGroup>
-            <InputGroup className={"mb-3 " + (formLastNameChanged && !formLastNameValid ? "patient-input-invalid" : "")}>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Nazwisko</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    disabled={props.disabled}
-                    value={formLastName}
-                    onChange={e => {
-                        setFormLastNameValid(isNotEmpty(e.target.value));
-                        setFormLastName(e.target.value);
-                    }}
-                    onBlur={() => setFormLastNameChanged(true)}
-                    placeholder="Nazwisko pacjenta"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-                <div className="patient-input-error-message">Nazwisko nie może być puste</div>
-            </InputGroup>
-            <InputGroup className={"mb-3 " + (formPeselChanged && !formPeselValid ? "patient-input-invalid" : "")}>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">PESEL</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
+            <ZrInput
+                label={"Imię"}
+                errorMessage={"Pole imię nie może być puste"}
+                placeholder={"Imię pacjenta"}
+                className="mb-3"
+                disabled={props.disabled}
+                value={formFirstName}
+                onChange={e => {
+                    setFormFirstNameValid(isNotEmpty(e.target.value));
+                    setFormFirstName(e.target.value);
+                }}
+                onBlur={() => setFormFirstNameChanged(true)}
+                isInvalid={formFirstNameChanged && !formFirstNameValid}
+            />
+            <ZrInput
+                label={"Nazwisko"}
+                errorMessage={"Pole nazwisko nie może być puste"}
+                placeholder={"Nazwisko pacjenta"}
+                className="mb-3"
+                disabled={props.disabled}
+                value={formLastName}
+                onChange={e => {
+                    setFormLastNameValid(isNotEmpty(e.target.value));
+                    setFormLastName(e.target.value);
+                }}
+                onBlur={() => setFormLastNameChanged(true)}
+                isInvalid={formLastNameChanged && !formLastNameValid}
+            />
+            <div className={"zr-input-with-copy"}>
+                <ZrInput
+                    label={"Pesel"}
+                    errorMessage={"Niepoprawny numer pesel"}
+                    placeholder={"Pesel pacjenta"}
+                    className="mb-3"
                     disabled={props.disabled}
                     value={formPesel}
                     onChange={e => {
@@ -151,81 +153,71 @@ function ListRow(props) {
                         setFormPesel(e.target.value);
                     }}
                     onBlur={() => setFormPeselChanged(true)}
-                    placeholder="PESEL"
-                    aria-describedby="inputGroup-sizing-default"
+                    isInvalid={formPeselChanged && !formPeselValid}
                 />
                 {props.copyPeselButton && <CopyToClipboard text={formPesel}
-                                 onCopy={() => {setCopied(true); setTimeout(()=> {setCopied(false);}, 2000) }}>
-                    <button className="btn btn-secondary with-tooltip">
-                        <span className="tooltiptext" style={ copied ? { opacity: 1} : {}}>PESEL skopiowany</span>
-                        Skopiuj</button>
+                                                           onCopy={() => {
+                                                               setCopied(true);
+                                                               setTimeout(() => {
+                                                                   setCopied(false);
+                                                               }, 2000)
+                                                           }}>
+                    <button className="btn zr-copy-btn button with-tooltip">
+                        <span className="tooltiptext" style={copied ? {opacity: 1} : {}}>PESEL skopiowany</span>
+                        Kopiuj
+                    </button>
                 </CopyToClipboard>}
-                <div className="patient-input-error-message">Niepoprawny numer PESEL</div>
-            </InputGroup>
-            <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Kod pocztowy</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    disabled={props.disabled}
-                    value={formPostalCode}
-                    onChange={e => setFormPostalCode(e.target.value)}
-                    placeholder="Kod pocztowy"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-            </InputGroup>
-            <InputGroup className={"mb-3 " + (formRemarksChanged && !formRemarksValid ? "patient-input-invalid" : "")}>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Uwagi/Objawy</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    disabled={props.disabled}
-                    as="textarea"
-                    value={formRemarks}
-                    onChange={e => {
-                        setFormRemarksValid(isNotEmpty(e.target.value));
-                        setFormRemarks(e.target.value);
-                    }}
-                    onBlur={() => setFormRemarksChanged(true)}
-                    placeholder="Uwagi/objawy"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-                <div className="patient-input-error-message">Uwagi/objawy nie mogą być puste</div>
-            </InputGroup>
-            <InputGroup className={"mb-3 " + (formPhoneNumberChanged && !isPhoneNumberEmpty(formPhoneNumber) && !formPhoneNumberValid ? "patient-input-invalid" : "")}>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Numer telefonu</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    disabled={props.disabled}
-                    value={formPhoneNumber}
-                    onChange={e => {
-                        setFormPhoneNumberValid(isPhoneNumberValid(e.target.value));
-                        setFormPhoneNumber(e.target.value);
-                    }}
-                    onBlur={() => setFormPhoneNumberChanged(true)}
-                    placeholder="Numer telefonu"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-                <div className="patient-input-error-message">Niepoprawny numer telefonu</div>
-            </InputGroup>
-            <InputGroup className={"email-input mb-3 " + (formEmailChanged && !isEmailEmpty(formEmail) && !formEmailValid ? "patient-input-invalid" : "")}>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Email</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    disabled={props.disabled}
-                    value={formEmail}
-                    onChange={e => {
-                        setFormEmailValid(isEmailValid(e.target.value));
-                        setFormEmail(e.target.value)
-                    }}
-                    onBlur={() => setFormEmailChanged(true)}
-                    placeholder="Email"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-                <div className="patient-input-error-message">Niepoprawny adres email</div>
-            </InputGroup>
+            </div>
+            <ZrInput
+                label={"Kod pocztowy"}
+                placeholder={"Kod pocztowy pacjenta"}
+                className="mb-3"
+                disabled={props.disabled}
+                value={formPostalCode}
+                onChange={e => setFormPostalCode(e.target.value)}
+            />
+            <ZrInput
+                label={"Leki na recepcie"}
+                errorMessage={"Pole leki na recepcie nie może być puste"}
+                placeholder={"Nazwy leków"}
+                className="mb-3"
+                disabled={props.disabled}
+                value={formRemarks}
+                onChange={e => {
+                    setFormRemarksValid(isNotEmpty(e.target.value));
+                    setFormRemarks(e.target.value);
+                }}
+                onBlur={() => setFormRemarksChanged(true)}
+                isInvalid={formRemarksChanged && !formRemarksValid}
+            />
+            <ZrInput
+                label={"Numer telefonu"}
+                errorMessage={"Niepoprawny numer telefonu"}
+                placeholder={"Numer telefonu pacjenta"}
+                className="mb-3"
+                disabled={props.disabled}
+                value={formPhoneNumber}
+                onChange={e => {
+                    setFormPhoneNumberValid(isPhoneNumberValid(e.target.value));
+                    setFormPhoneNumber(e.target.value);
+                }}
+                onBlur={() => setFormPhoneNumberChanged(true)}
+                isInvalid={formPhoneNumberChanged && !isPhoneNumberEmpty(formPhoneNumber) && !formPhoneNumberValid}
+            />
+            <ZrInput
+                label={"E-mail"}
+                errorMessage={"Niepoprawny adres e-mail"}
+                placeholder={"Adres e-mail"}
+                className="mb-3"
+                disabled={props.disabled || props.useDefaultEmail}
+                value={formEmail}
+                onChange={e => {
+                    setFormEmailValid(isEmailValid(e.target.value));
+                    setFormEmail(e.target.value)
+                }}
+                onBlur={() => setFormEmailChanged(true)}
+                isInvalid={formEmailChanged && !isEmailEmpty(formEmail) && !formEmailValid}
+            />
 
             <div className={( showOneFormOfContact && !formPhoneNumberValid && !formEmailValid ) ? "patient-input-invalid" : ""}>
                 <div className="patient-input-error-message">Proszę podać przynajmniej jedną forme kontaktu (telefon lub email)</div>

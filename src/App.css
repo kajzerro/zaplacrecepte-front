@@ -39,6 +39,26 @@
     color: #808080;
 }
 
+.zr-red-outline-button {
+    border: 1px solid #DA3A07;
+    /* border-radius: 4px; */
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #DA3A07;
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.zr-red-outline-button:hover {
+    background: #ffdfd6;
+    color: #DA3A07;
+}
+
 .zr-red-button {
     width: 100%;
     height: 40px;
@@ -55,10 +75,32 @@
     letter-spacing: 0.15px;
     color: #FFFFFF;
 }
-
 .zr-red-button:hover {
     border: 1px solid #f63700;
     background: #F63700;
+    color: #FFFFFF;
+}
+
+.zr-blue-button {
+    width: 100%;
+    height: 40px;
+    display: block;
+    border: 1px solid #00B0FF;
+    background: #00B0FF;
+    border-radius: 4px;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #FFFFFF;
+}
+
+.zr-blue-button:hover {
+    border: 1px solid #2cbeff;
+    background: #2cbeff;
     color: #FFFFFF;
 }
 
@@ -115,6 +157,11 @@ h3.zr-header {
     padding-left: 6px;
 }
 
+.zr-input label.disabled {
+    background-color: rgb(235, 235, 228);
+    border-radius: 3.5px;
+}
+
 .zr-input.invalid label {
     color: #E21717;
 }
@@ -164,7 +211,168 @@ h3.zr-header {
     display: block;
 }
 
+.zr-input-with-copy {
+    position: relative;
+}
 
+.zr-input-with-copy .zr-input input {
+    width: 75%;
+}
+
+.zr-input-with-copy .zr-copy-btn {
+    width: 20%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 2px solid #2F4FA7;
+    box-sizing: border-box;
+    border-radius: 6px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 1.15px;
+    text-transform: uppercase;
+    color: #2F4FA7;
+}
+
+.zr-checkbox {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    color: #676767;
+
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.zr-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: white;
+    border: 2px solid #979797;
+    border-radius: 2px;
+}
+
+/* When the checkbox is checked, add a blue background */
+.zr-checkbox input:checked ~ .checkmark {
+    background-color: #00B0FF;
+    border: 0;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.zr-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.zr-checkbox .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
+
+.zr-status-change-unwrapped {
+    background: #FFFFFF;
+    border: 1px solid #DA3A07;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.zr-status-change-unwrapped .status {
+    position: relative;
+    cursor: pointer;
+}
+
+.zr-status-change-unwrapped .status span {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    border: 2px solid #A8A8A8;
+    background-color: #A8A8A8;
+}
+
+.zr-status-change-unwrapped .status label {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    margin-left: 22px;
+    margin-bottom: 0;
+    cursor: pointer;
+    color: #424242;
+}
+
+.zr-status-change-unwrapped .status.green span {
+    border: 2px solid #3EBB2A;
+    background-color: #3EBB2A;
+}
+
+.zr-status-change-unwrapped .status.green label {
+    color: #1D5714;
+}
+
+.zr-status-change-unwrapped .status.blue span {
+    border: 2px solid #00B0FF;
+    background-color: #00B0FF;
+}
+
+.zr-status-change-unwrapped .status.blue label {
+    color: #00B0FF;
+}
+
+.zr-status-change-unwrapped .status.red span {
+    border: 2px solid #ee5454;
+    background-color: #ee5454;
+}
+
+.zr-status-change-unwrapped .status.red label {
+    color: #951112;
+}
 
 .patient-row {
     border-bottom: 1px solid #cccccc63;
@@ -207,11 +415,6 @@ h3.zr-header {
 
 .patient-add-button {
     background-color: #ddffd8b5;
-}
-
-.patient-no-paddings .col-3{
-    padding-left: 0;
-    padding-right: 0;
 }
 
 .patient-status-info {
@@ -474,7 +677,7 @@ h3.zr-header {
     line-height: 52px;
 }
 
-.list-page .status-button {
+.status-button {
     border: 2px solid #A8A8A8;
     background-color: #A8A8A8;
     box-sizing: border-box;
@@ -489,27 +692,74 @@ h3.zr-header {
     letter-spacing: 1.15px;
     text-transform: uppercase;
 
-    color: #FFFFFF;
-    opacity: 1;
+    pointer-events: none;
+    color: #FFFFFF !important;
+    opacity: 1 !important;
 }
 
-.list-page .status-button.blue {
+.status-button.blue {
     border: 2px solid #00B0FF;
     background-color: #00B0FF;
 }
 
-.list-page .status-button.green {
+.status-button.green {
     border: 2px solid #3EBB2A;
     background-color: #3EBB2A;
 }
 
-.list-page .status-button.red {
+.status-button.red {
     border: 2px solid #ee5454;
     background-color: #ee5454;
 }
 
 .list-page .patient-spinner {
     color: #00B0FF;
+}
+
+.list-page-modal .modal-content {
+    padding: 10px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 0;
+}
+
+.list-page-modal .modal-header {
+    border-bottom: 0;
+    padding-bottom: 6px;
+}
+
+.list-page-modal .modal-footer {
+    border-top: 0;
+}
+
+.list-page-modal .modal-header button {
+    display: none;
+}
+
+.list-page-modal .modal-footer button {
+    height: 56px;
+}
+
+.list-page-modal .modal-footer .save-button {
+    width: 50%;
+    margin-left: 10px;
+}
+
+.list-page-modal .modal-footer .btn-secondary {
+    width: 30%;
+}
+
+.list-page-modal .modal-footer .btn-secondary {
+    width: 30%;
+}
+
+.list-page-modal.edit-prescription {
+    max-width: 582px;
+}
+
+.list-page-modal .status-button {
+    line-height: 24px;
+    margin-bottom: 16px;
 }
 
 .payment-page {

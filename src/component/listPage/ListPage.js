@@ -4,11 +4,13 @@ import Modal from 'react-bootstrap/Modal'
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
 import PrescriptionFields from '../common/PrescriptionFields';
+import ZrCheckbox from '../common/ZrCheckbox';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
 import moment from 'moment-timezone';
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
+import ZrStatusButton from '../common/ZrStatusButton';
 
 function ListPage() {
 
@@ -24,6 +26,7 @@ function ListPage() {
     const [inRealizationState, setInRealizationState] = useState(false);
     const [editedPrescriptionNumber, setEditedPrescriptionNumber] = useState("");
     const [checkAll, setCheckAll] = useState(false);
+    const [useDefaultEmail, setUseDefaultEmail] = useState(true);
 
     const handleClose = () => {
         setShowAddModal(false);
@@ -103,7 +106,7 @@ function ListPage() {
 
     return (
         <>
-            <div>
+            <div className="list-page">
                 <div className="search-header">
                     <div className="container">
                         <div className="row pb-2">
@@ -125,7 +128,7 @@ function ListPage() {
                         </div>
                     </div>
                 </div>
-                <div className="list-page">
+                <div>
                     <div className="container">
                         <div className="row mb-5">
                             <div className="col-5 mt-2">
@@ -140,18 +143,18 @@ function ListPage() {
                                 <div className="container-fluid functional-top">
                                     <div className="row">
                                         <div className="col-3">
-                                            <div className="select">
-                                    <span>
-                                    Lista
-                                    </span>
-                                            </div>
+                                            {/*        <div className="select">*/}
+                                            {/*<span>*/}
+                                            {/*Lista*/}
+                                            {/*</span>*/}
+                                            {/*        </div>*/}
                                         </div>
                                         <div className="col-4">
-                                            <div className="select">
-                                    <span>
-                                    Sortowanie
-                                    </span>
-                                            </div>
+                                            {/*        <div className="select">*/}
+                                            {/*<span>*/}
+                                            {/*Sortowanie*/}
+                                            {/*</span>*/}
+                                            {/*        </div>*/}
                                         </div>
                                         <div className="col-5">
                                             <button type="button"
@@ -204,28 +207,34 @@ function ListPage() {
 
                 </div>
             </div>
-            <Modal show={showAddModal} onHide={handleClose} animation={false}>
+            <Modal show={showAddModal} onHide={handleClose} animation={false} dialogClassName={"list-page-modal"}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Dodawanie recepty</Modal.Title>
+                    <Modal.Title><h4 className="zr-header">
+                        Recepty
+                    </h4></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll}/>
+                    <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll}
+                                        useDefaultEmail={useDefaultEmail}/>
+                    <ZrCheckbox label="Użyj domyślnego adresu e-mail" onChange={setUseDefaultEmail}
+                                initValue={useDefaultEmail}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
                         Zamknij
                     </button>
-                    <div className="patient-blocking-button">
+                    <div className="patient-blocking-button save-button">
                         <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
-                        <button className="btn btn-primary" onClick={handleAddSave} disabled={savingInProgress}>
+                        <button className="btn zr-red-button" onClick={handleAddSave} disabled={savingInProgress}>
                             Zapisz i dodaj recepte
                         </button>
                     </div>
                 </Modal.Footer>
             </Modal>
-            <Modal show={showEditModal} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edycja recepty</Modal.Title>
+            <Modal show={showEditModal} onHide={handleClose} animation={false}
+                   dialogClassName={"list-page-modal edit-prescription"}>
+                <Modal.Header>
+                    <Modal.Title><h4 className="zr-header">Szczegóły recepty</h4></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {
@@ -247,14 +256,15 @@ function ListPage() {
                         <>
                             {selectedRowData.status !== "COMPLETED" &&
                             <button
-                                className={"btn btn-block btn-primary mb-3"}
+                                className={"btn btn-block zr-blue-button mb-3"}
                                 onClick={() => {
                                     setInRealizationState(true);
                                     setEditedStatus('COMPLETED');
-                                }}>Zrealizuj
+                                }}>Zrealizuj receptę
                             </button>
                             }
                             <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
+                            <ZrStatusButton value={editedStatus}/>
                             <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}
                                                 copyPeselButton/>
                         </>
@@ -275,7 +285,7 @@ function ListPage() {
                             Wstecz
                         </button>
                     }
-                    <button className="btn btn-primary" onClick={handleEditSave}>
+                    <button className="btn zr-red-button save-button" onClick={handleEditSave}>
                         Zapisz zmiany
                     </button>
                 </Modal.Footer>

@@ -1,24 +1,5 @@
 import React from 'react';
-
-function createButton(status) {
-    switch (status) {
-        case 'WAITING_FOR_CONFIRMATION':
-            return <button disabled type="button"
-                           className="btn btn-outline-success btn-block status-button blue">Zapłacono</button>;
-        case 'NEW':
-        case 'PENDING':
-            return <button disabled type="button"
-                           className="btn btn-outline-secondary btn-block status-button ">Niezapłacona</button>;
-        case 'COMPLETED':
-            return <button disabled type="button"
-                           className="btn btn-outline-primary btn-block status-button green">Zrealizowana</button>;
-        case 'CANCELED':
-            return <button disabled type="button"
-                           className="btn btn-outline-danger btn-block status-button red">Anulowana</button>;
-        default:
-            return null;
-    }
-}
+import ZrStatusButton from '../common/ZrStatusButton';
 
 function ListRow(props) {
 
@@ -41,7 +22,7 @@ function ListRow(props) {
                 <span>{props.prescription.postalCode}</span>
             </div>
             <div className="col-3">
-                {createButton(props.prescription.status)}
+                <ZrStatusButton value={props.prescription.status}/>
             </div>
         </div>
     );
