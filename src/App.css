@@ -656,6 +656,7 @@ h3.zr-header {
 }
 
 .list-page .patient-row-wrapper {
+    cursor: pointer;
     background: #FFFFFF;
     border: 1px solid #E0E8EC;
     box-sizing: border-box;
