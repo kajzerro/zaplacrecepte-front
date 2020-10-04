@@ -595,15 +595,16 @@ h3.zr-header {
 
 }
 
-.search-header button {
+.search-header button.menu-button {
     border: 1px solid #AAC9D7;
     box-sizing: border-box;
     border-radius: 10px;
     background: white;
     right: 8px;
+    outline: 0;
 }
 
-.search-header button img {
+.search-header .menu-button img {
     padding: 5px;
     height: 35px;
 }
@@ -632,6 +633,68 @@ h3.zr-header {
     background: #EDF6FA;
     padding-bottom: 70px;
     position: relative;
+}
+
+.list-page .search-header .menu {
+    background: #FFFFFF;
+    border: 1px solid #AAC9D7;
+    box-sizing: border-box;
+    border-radius: 10px;
+    position: absolute;
+    top: 74px;
+    z-index: 1;
+    width: 280px;
+    right: 8px;
+    text-align: center;
+}
+
+.list-page .search-header .menu img.big-avatar {
+    padding-top: 26px;
+    padding-bottom: 20px;
+    width: 55px;
+    display: block;
+    margin: auto;
+}
+
+.list-page .search-header .menu span {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+
+    /* identical to box height, or 150% */
+    letter-spacing: 0.15px;
+
+    color: #676767;
+}
+
+.list-page .search-header .menu .log-out {
+    border-top: 1px solid #AAC9D7;
+    box-sizing: border-box;
+    background: white;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    /* identical to box height, or 150% */
+    text-align: center;
+    letter-spacing: 0.15px;
+
+    color: #516B7C;
 }
 
 .list-page .select span {

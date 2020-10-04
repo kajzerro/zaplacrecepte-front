@@ -32,6 +32,7 @@ function ListPage() {
         }, message: ""
     });
     const [searchPatientQuery, setSearchPatientQuery] = useState("");
+    const [showMenu, setShowMenu] = useState(false);
 
     const searchPatientFilter = (patientData) => {
         return searchPatientQuery === "" ||
@@ -152,12 +153,25 @@ function ListPage() {
                                        onChange={e => setSearchPatientQuery(e.target.value)}/>
                             </div>
                             <div className="col-3">
-                                <button className="to-bottom" onClick={handleLogout}>
+                                <button className="menu-button to-bottom" onClick={() => setShowMenu(!showMenu)}>
                                     <img src="listPage/awatar.png"/>
                                     <span>
-                                Wyloguj
+                                Dr Marek Krzystyniak
                                 </span>
                                 </button>
+                                {showMenu &&
+                                <div className={"menu"}>
+                                    <img className={"big-avatar"} src="listPage/awatar.png"/>
+                                    <h4 className={"zr-header"}>
+                                        Dr Marek Krzystyniak
+                                    </h4>
+                                    <div className={"mb-3"}>
+                                        <span>krzyampagabinet@outlook.com</span>
+                                    </div>
+                                    <button className={"log-out"} onClick={handleLogout}>
+                                        <img src="listPage/logOut.svg"/> Wyloguj się
+                                    </button>
+                                </div>}
                             </div>
                         </div>
                     </div>
