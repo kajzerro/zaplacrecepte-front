@@ -1,12 +1,24 @@
 import React from 'react';
+import Footer from "../common/Footer";
 
 function ThankYouPage() {
 
     return (
-        <div className="patient-thankyou">
-            <div>
-                <div className="icon"><img src="/logo.png" alt="Smiley face" height="80" width="80"/></div>
-                <h1>Recepta została przekazana do realizacji</h1>
+        <div className="thankyou-page">
+            <div className="fullscreen">
+                <div className="body-wrapper">
+                    <img className={"logo mb-4"} src="/logo.svg"/>
+                    <h3 className="zr-header">
+                        Recepta została przekazana do realizacji
+                    </h3>
+                    <div className={"zr-header-description"}>
+                        Informacja o realizacji recepty oraz kod recepty zostaną przesłane
+                        na podany adres email oraz SMSem na udostępniony numer telefonu.
+
+                    </div>
+                </div>
+                <img src="/thankyouPage/bottomImage.png" className={"bottom-image"}/>
+                <Footer/>
             </div>
         </div>
     );

@@ -445,15 +445,42 @@ h3.zr-header {
     margin: auto;
 }
 
-.patient-thankyou {
-    background-color: #8cfffb14;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
+.thankyou-page {
+    background: #EDF6FA;
+}
+
+.thankyou-page .body-wrapper {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    z-index: 1;
+    padding: 2%;
+    max-width: 720px;
+    width: 90%;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
+}
+
+.thankyou-page .body-wrapper .logo {
+    width: 100%;
+}
+
+.thankyou-page .bottom-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 30%;
+}
+
+@media (min-width: 576px) {
+    .thankyou-page .bottom-image {
+        height: 40%;
+    }
 }
 
 .patient-input-error-message {
