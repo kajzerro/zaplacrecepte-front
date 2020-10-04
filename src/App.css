@@ -198,6 +198,18 @@ h3.zr-header {
     outline: none;
 }
 
+.zr-input ::-webkit-input-placeholder { /* Edge */
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.zr-input :-ms-input-placeholder { /* Internet Explorer */
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.zr-input ::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
+
 .zr-input .patient-input-error-message {
     display: none;
 }

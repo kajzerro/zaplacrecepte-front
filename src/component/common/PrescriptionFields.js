@@ -140,7 +140,7 @@ function ListRow(props) {
                 onBlur={() => setFormLastNameChanged(true)}
                 isInvalid={formLastNameChanged && !formLastNameValid}
             />
-            <div className={"zr-input-with-copy"}>
+            <div className={props.copyPeselButton ? "zr-input-with-copy" : ""}>
                 <ZrInput
                     label={"Pesel"}
                     errorMessage={"Niepoprawny numer pesel"}
