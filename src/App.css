@@ -842,6 +842,13 @@ h3.zr-header {
     display: block;
     margin: 0 auto;
     padding: 10px;
+    height: 55px;
+}
+
+@media (min-width: 576px) {
+    .payment-page .header img {
+        height: auto;
+    }
 }
 
 .payment-page .header {

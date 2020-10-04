@@ -39,7 +39,7 @@ function PaymentPage() {
             :
             <div className="payment-page">
                 <div className="fullscreen">
-                    <div className={"header d-none d-sm-block"}>
+                    <div className={"header"}>
                         <img src="/logo.svg"/>
                     </div>
                     <div className="body-wrapper">
