@@ -140,7 +140,7 @@ function ListPage() {
 
     return (
         <>
-            <div className="list-page">
+            <div className="list-page fullscreen">
                 <div className="search-header">
                     <div className="container">
                         <div className="row pb-2">
