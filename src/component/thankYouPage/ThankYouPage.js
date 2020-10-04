@@ -17,7 +17,7 @@ function ThankYouPage() {
 
                     </div>
                 </div>
-                <img src="/thankyouPage/bottomImage.png" className={"bottom-image"}/>
+                <img src="/thankyouPage/bottomImage.svg" className={"bottom-image"}/>
                 <Footer/>
             </div>
         </div>
