@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal'
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
 import PrescriptionFields from '../common/PrescriptionFields';
-import ZrCheckbox from '../common/ZrCheckbox';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
 import moment from 'moment-timezone';
@@ -26,7 +25,6 @@ function ListPage() {
     const [inRealizationState, setInRealizationState] = useState(false);
     const [editedPrescriptionNumber, setEditedPrescriptionNumber] = useState("");
     const [checkAll, setCheckAll] = useState(false);
-    const [useDefaultEmail, setUseDefaultEmail] = useState(true);
     const [errorAlert, setErrorAlert] = useState({
         show: false, onClose: () => {
         }, message: ""
@@ -266,9 +264,7 @@ function ListPage() {
                 </Modal.Header>
                 <Modal.Body>
                     <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll}
-                                        useDefaultEmail={useDefaultEmail}/>
-                    <ZrCheckbox label="Użyj domyślnego adresu e-mail" onChange={setUseDefaultEmail}
-                                initValue={useDefaultEmail}/>
+                                        defaultEmailFeature={true}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
@@ -316,7 +312,7 @@ function ListPage() {
                             <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
                             <ZrStatusButton value={editedStatus}/>
                             <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}
-                                                copyPeselButton/>
+                                                copyPeselButton defaultEmailFeature={true}/>
                         </>
                     }
                 </Modal.Body>
