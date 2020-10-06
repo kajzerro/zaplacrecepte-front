@@ -3,8 +3,10 @@ import * as EmailValidator from 'email-validator';
 import {validatePolish} from 'validate-polish';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ZrInput from './ZrInput';
+import ZrCheckbox from "./ZrCheckbox";
 
 function ListRow(props) {
+    const OWNER_EMAIL_ADDRESS = "krzyampagabinet@outlook.com";
 
     const isNotEmpty = (input) => {
         return input !== "";
@@ -52,13 +54,29 @@ function ListRow(props) {
     const [formPhoneNumberValid, setFormPhoneNumberValid] = useState(isPhoneNumberValid(formPhoneNumber));
     const [formPhoneNumberChanged, setFormPhoneNumberChanged] = useState(false);
 
-    const [formEmail, setFormEmail] = useState(props.initData.email || "");
+    const [formEmail, setFormEmail] = useState(props.initData.email || OWNER_EMAIL_ADDRESS);
     const [formEmailValid, setFormEmailValid] = useState(isEmailValid(formEmail));
     const [formEmailChanged, setFormEmailChanged] = useState(false);
 
     const [showOneFormOfContact, setShowOneFormOfContact] = useState(false);
     const [copied, setCopied] = useState(false);
 
+    const [useDefaultEmail, setUseDefaultEmail] = useState(props.initData.email === undefined || props.initData.email === OWNER_EMAIL_ADDRESS);
+    console.log(props.initData.email);
+    const setUseDefaultEmailWrapper = (value) => {
+        setUseDefaultEmail(value);
+        if (value === true) {
+            setFormEmail(OWNER_EMAIL_ADDRESS);
+            setFormEmailValid(true);
+        } else {
+            if (!(props.initData.email === undefined || props.initData.email === OWNER_EMAIL_ADDRESS)) {
+                setFormEmail(props.initData.email);
+            } else {
+                setFormEmail("");
+            }
+            setFormEmailValid(false);
+        }
+    };
 
     const isAllValid = () => {
         return formFirstNameValid &&
@@ -80,7 +98,7 @@ function ListRow(props) {
                 postalCode: formPostalCode,
                 remarks: formRemarks,
                 phoneNumber: formPhoneNumber,
-                email: formEmail,
+                email: formEmail ? formEmail : OWNER_EMAIL_ADDRESS,
                 allValid: allValid
             });
     }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, onChange, allValid]);
@@ -101,14 +119,6 @@ function ListRow(props) {
             }
         }
     }, [checkAll]);
-
-
-    useEffect(() => {
-        if (props.useDefaultEmail) {
-            setFormEmail("krzyampagabinet@outlook.com");
-            setFormEmailValid(true);
-        }
-    }, [props.useDefaultEmail]);
 
     return (
         <>
@@ -204,12 +214,18 @@ function ListRow(props) {
                 onBlur={() => setFormPhoneNumberChanged(true)}
                 isInvalid={formPhoneNumberChanged && !isPhoneNumberEmpty(formPhoneNumber) && !formPhoneNumberValid}
             />
+            {
+                props.defaultEmailFeature &&
+                <ZrCheckbox className="mb-3" label="Pacjent nie posiada adresu e-mail"
+                            onChange={setUseDefaultEmailWrapper}
+                            initValue={useDefaultEmail}/>
+            }
             <ZrInput
                 label={"E-mail"}
                 errorMessage={"Niepoprawny adres e-mail"}
                 placeholder={"Adres e-mail"}
-                className="mb-3"
-                disabled={props.disabled || props.useDefaultEmail}
+                className={"mb-3" + props.defaultEmailFeature && useDefaultEmail ? "d-none" : ""}
+                disabled={props.disabled || useDefaultEmail}
                 value={formEmail}
                 onChange={e => {
                     setFormEmailValid(isEmailValid(e.target.value));
