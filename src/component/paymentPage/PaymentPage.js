@@ -31,10 +31,20 @@ function PaymentPage() {
 
     return (
         (clientData && clientData.status === 'CANCELED') ?
-            <div className="payment-page-cancel">
-                <h4>
-                    Płatność za receptę została anulowana, prosimy o kontakt z recepcją.
-                </h4>
+            <div className="prescription-expired-page">
+                <div className="fullscreen">
+                    <div className="body-wrapper">
+                        <img className={"logo mb-4"} src="/logo.svg"/>
+                        <h3 className="zr-header">
+                            Recepta została już zrealizowana lub lekarz anulował Twoje zamówienie.
+                        </h3>
+                        <div className={"zr-header-description"}>
+                            W razie pytań prosimy o kontakt z gabinetem.
+                        </div>
+                    </div>
+                    <img src="/prescriptionExpiredPage/bottomImage.svg" className={"bottom-image"}/>
+                    <Footer/>
+                </div>
             </div>
             :
             <div className="payment-page">
