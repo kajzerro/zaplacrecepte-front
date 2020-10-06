@@ -156,14 +156,14 @@ function ListPage() {
                                 <button className="menu-button to-bottom" onClick={() => setShowMenu(!showMenu)}>
                                     <img src="listPage/awatar.png"/>
                                     <span>
-                                Dr Marek Krzystyniak
+                                Dr Adam Dyrda
                                 </span>
                                 </button>
                                 {showMenu &&
                                 <div className={"menu"}>
                                     <img className={"big-avatar"} src="listPage/awatar.png"/>
                                     <h4 className={"zr-header"}>
-                                        Dr Marek Krzystyniak
+                                        Dr Adam Dyrda
                                     </h4>
                                     <div className={"mb-3"}>
                                         <span>krzyampagabinet@outlook.com</span>
