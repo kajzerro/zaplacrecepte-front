@@ -457,6 +457,48 @@ h3.zr-header {
     margin: auto;
 }
 
+.prescription-expired-page {
+    background: #EDF6FA;
+}
+
+.prescription-expired-page .body-wrapper {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    z-index: 1;
+    padding: 2%;
+    max-width: 720px;
+    width: 90%;
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.prescription-expired-page .body-wrapper .logo {
+    width: 100%;
+}
+
+.prescription-expired-page .bottom-image {
+    position: absolute;
+    bottom: 34px;
+    right: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 30%;
+}
+
+@media (min-width: 576px) {
+    .prescription-expired-page .bottom-image {
+        height: 40%;
+    }
+}
+
+.patient-input-error-message {
+    display: none;
+}
+
 .thankyou-page {
     background: #EDF6FA;
 }
