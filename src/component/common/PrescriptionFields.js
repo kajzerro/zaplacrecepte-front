@@ -192,6 +192,7 @@ function ListRow(props) {
                 }}
                 onBlur={() => setFormPhoneNumberChanged(true)}
                 isInvalid={formPhoneNumberChanged && !formPhoneNumberValid}
+                noSelectionOnFocus={true}
             />
             <ZrInput
                 label={"E-mail"}
