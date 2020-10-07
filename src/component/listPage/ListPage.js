@@ -287,7 +287,7 @@ function ListPage() {
                 <Modal.Header>
                     <Modal.Title>
                         {!inRealizationState && <h4 className="zr-header">Szczegóły recepty</h4>}
-                        {inRealizationState && <h4 className="zr-header">Realizacja recepty</h4>}
+                        {inRealizationState && <h4 className="zr-header">Realizacja recepty dla: {selectedRowData.firstName} {selectedRowData.lastName}</h4>}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
