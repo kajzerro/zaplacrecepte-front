@@ -3,7 +3,7 @@ import React from 'react';
 function ZrInput(props) {
 
     function onSelectAction(e) {
-        if (props.noSelectionOnFocus) {
+        if (props.noSelectionOnFocus && e.target.value === "+48") {
             e.target.selectionStart = e.target.value.length;
             e.target.selectionEnd = e.target.value.length;
         }
