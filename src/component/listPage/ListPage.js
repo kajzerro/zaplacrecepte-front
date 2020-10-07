@@ -153,25 +153,28 @@ function ListPage() {
                                        onChange={e => setSearchPatientQuery(e.target.value)}/>
                             </div>
                             <div className="col-3">
-                                <button className="menu-button to-bottom" onClick={() => setShowMenu(!showMenu)}>
+                                <button className="menu-button to-bottom" onClick={() => setShowMenu(true)}>
                                     <img src="listPage/awatar.png"/>
                                     <span>
                                 Dr Marek Krzystyniak
                                 </span>
                                 </button>
                                 {showMenu &&
-                                <div className={"menu"}>
-                                    <img className={"big-avatar"} src="listPage/awatar.png"/>
-                                    <h4 className={"zr-header"}>
-                                        Dr Marek Krzystyniak
-                                    </h4>
-                                    <div className={"mb-3"}>
-                                        <span>krzyampagabinet@outlook.com</span>
+                                <>
+                                    <div className={"menu"}>
+                                        <img className={"big-avatar"} src="listPage/awatar.png"/>
+                                        <h4 className={"zr-header"}>
+                                            Dr Marek Krzystyniak
+                                        </h4>
+                                        <div className={"mb-3"}>
+                                            <span>krzyampagabinet@outlook.com</span>
+                                        </div>
+                                        <button className={"log-out"} onClick={handleLogout}>
+                                            <img src="listPage/logOut.svg"/> Wyloguj się
+                                        </button>
                                     </div>
-                                    <button className={"log-out"} onClick={handleLogout}>
-                                        <img src="listPage/logOut.svg"/> Wyloguj się
-                                    </button>
-                                </div>}
+                                    <div className={"menu-background"} onClick={() => setShowMenu(false)}/>
+                                </>}
                             </div>
                         </div>
                     </div>
