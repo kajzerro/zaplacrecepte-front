@@ -17,17 +17,10 @@ function ListRow(props) {
     const isEmailValid = (input) => {
         return EmailValidator.validate(input);
     };
-    const isEmailEmpty = (email) => {
-        return email === "";
-    };
 
     const isPhoneNumberValid = (input) => {
         var phoneRegexp = /\+48[0-9]{9}$/;
         return input.match(phoneRegexp) !== null;
-    };
-
-    const isPhoneNumberEmpty = (phoneNumber) => {
-        return phoneNumber === '' || phoneNumber === '+48';
     };
 
     const [formFirstName, setFormFirstName] = useState(props.initData.firstName || "");
@@ -65,7 +58,8 @@ function ListRow(props) {
             formLastNameValid &&
             formPeselValid &&
             formRemarksValid &&
-            (formPhoneNumberValid || formEmailValid);
+            formPhoneNumberValid &&
+            formEmailValid;
     };
 
     const onChange = props.onChange;
@@ -92,13 +86,8 @@ function ListRow(props) {
             setFormLastNameChanged(true);
             setFormPeselChanged(true);
             setFormRemarksChanged(true);
-            if(isEmailEmpty(formEmail) && isPhoneNumberEmpty(formPhoneNumber)) {
-                setShowOneFormOfContact(true);
-            }
-            else {
-                setFormPhoneNumberChanged(true);
-                setFormEmailChanged(true)
-            }
+            setFormPhoneNumberChanged(true);
+            setFormEmailChanged(true);
         }
     }, [checkAll]);
 
@@ -202,7 +191,7 @@ function ListRow(props) {
                     setFormPhoneNumber(e.target.value);
                 }}
                 onBlur={() => setFormPhoneNumberChanged(true)}
-                isInvalid={formPhoneNumberChanged && !isPhoneNumberEmpty(formPhoneNumber) && !formPhoneNumberValid}
+                isInvalid={formPhoneNumberChanged && !formPhoneNumberValid}
             />
             <ZrInput
                 label={"E-mail"}
@@ -216,12 +205,8 @@ function ListRow(props) {
                     setFormEmail(e.target.value)
                 }}
                 onBlur={() => setFormEmailChanged(true)}
-                isInvalid={formEmailChanged && !isEmailEmpty(formEmail) && !formEmailValid}
+                isInvalid={formEmailChanged && !formEmailValid}
             />
-
-            <div className={( showOneFormOfContact && !formPhoneNumberValid && !formEmailValid ) ? "patient-input-invalid" : ""}>
-                <div className="patient-input-error-message">Proszę podać przynajmniej jedną forme kontaktu (telefon lub email)</div>
-            </div>
         </>
     );
 }
