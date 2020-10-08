@@ -122,8 +122,14 @@ h2.zr-header {
 }
 
 h3.zr-header {
-    font-size: 30px;
+     font-size: 30px;
+     line-height: 50px;
+ }
+
+h4.zr-header {
+    font-size: 28px;
     line-height: 50px;
+    display: inline;
 }
 
 @media (max-height: 600px) {
@@ -581,7 +587,7 @@ h3.zr-header {
 
 .statue {
   overflow: auto;
-  background-color: #8cfffb14;
+  background-color: #FFFFFF;
   height: 100%;
   width: 100%;
   position: fixed;
