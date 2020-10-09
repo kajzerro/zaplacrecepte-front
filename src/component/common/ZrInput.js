@@ -17,7 +17,8 @@ function ZrInput(props) {
             <input type="text" value={props.value} onChange={props.onChange} onBlur={props.onBlur}
                    onSelect={onSelectAction}
                    placeholder={props.placeholder}
-                   readOnly={props.onChange === undefined} disabled={props.disabled}/>
+                   readOnly={props.onChange === undefined} disabled={props.disabled}
+                   autoFocus = {props.autoFocus && props.value === ''}/>
             <div className="patient-input-error-message">{props.errorMessage}</div>
         </div>
     );
