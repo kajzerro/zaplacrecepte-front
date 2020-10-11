@@ -4,8 +4,10 @@ import './LoginPage.css';
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
 import ZrFooter from '../common/ZrFooter';
+import ZrHeader from "../common/ZrHeader";
 
 function LoginPage() {
+    let history = useHistory();
 
     function login() {
         axios.get(getEndpoint() + "/api/login",
@@ -29,30 +31,13 @@ function LoginPage() {
     const [formLogin, setFormLogin] = useState("");
     const [formPassword, setFormPassword] = useState("");
     const [wrongUserOrPassword, setWrongUserOrPassword] = useState(false);
-
-    let history = useHistory();
     return (
         <div>
             <div className="login-page">
                 <div className="container-fluid">
                     <div className="row fullscreen">
                         <div className="col-6">
-                            <div className="row">
-                                <div className="col-12">
-                                    <div className="row login-header">
-                                        <div className="col-4">
-                                            <img src="logo.svg"/>
-                                        </div>
-                                        <div className="col-8">
-                                            <ul>
-                                                <li onClick={() => history.push('/wspolpraca')}>Współpraca</li>
-                                                <li onClick={() => history.push('/kontakt')}>Kontakt</li>
-                                                <li onClick={() => history.push('/regulamin')}>Regulamin</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ZrHeader/>
                             <div className="row body-wrapper">
                                 <div className="col-12 offset-xl-1 col-xl-11">
                                     <h1 className="zr-header">Witaj w ZaplacRecepte.pl</h1>
