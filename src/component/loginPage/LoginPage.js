@@ -4,7 +4,7 @@ import './LoginPage.css';
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
 import ZrFooter from '../common/ZrFooter';
-import ZrHeader from "../common/ZrHeader";
+import ZrHeaderMenu from "../common/ZrHeaderMenu";
 
 function LoginPage() {
     let history = useHistory();
@@ -37,7 +37,7 @@ function LoginPage() {
                 <div className="container-fluid">
                     <div className="row fullscreen">
                         <div className="col-6">
-                            <ZrHeader/>
+                            <ZrHeaderMenu/>
                             <div className="row body-wrapper">
                                 <div className="col-12 offset-xl-1 col-xl-11">
                                     <h1 className="zr-header">Witaj w ZaplacRecepte.pl</h1>

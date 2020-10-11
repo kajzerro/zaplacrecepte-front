@@ -1,7 +1,7 @@
 import React from 'react';
 import {useHistory} from "react-router-dom";
 
-function ZrHeader(props) {
+function ZrHeaderMenu(props) {
     let history = useHistory();
 
     return (
@@ -24,4 +24,4 @@ function ZrHeader(props) {
     );
 }
 
-export default ZrHeader;
+export default ZrHeaderMenu;
