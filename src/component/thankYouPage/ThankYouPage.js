@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from "../common/Footer";
+import ZrFooter from "../common/ZrFooter";
 
 function ThankYouPage() {
 
@@ -18,7 +18,7 @@ function ThankYouPage() {
                     </div>
                 </div>
                 <img src="/thankyouPage/bottomImage.svg" className={"bottom-image"}/>
-                <Footer/>
+                <ZrFooter/>
             </div>
         </div>
     );

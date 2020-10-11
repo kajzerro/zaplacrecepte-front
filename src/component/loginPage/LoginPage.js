@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import './LoginPage.css';
 import axios from 'axios';
 import {getEndpoint} from '../config/Config';
-import Footer from '../common/Footer';
+import ZrFooter from '../common/ZrFooter';
 
 function LoginPage() {
 
@@ -95,7 +95,7 @@ function LoginPage() {
                             <div className="background"/>
                             <img src="loginPage/loginImage.png"/>
                         </div>
-                        <Footer/>
+                        <ZrFooter/>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
-import Footer from '../common/Footer';
+import ZrFooter from '../common/ZrFooter';
 import {useParams} from 'react-router-dom'
 import axios from "axios";
 import {getEndpoint} from "../config/Config";
@@ -43,7 +43,7 @@ function PaymentPage() {
                         </div>
                     </div>
                     <img src="/prescriptionExpiredPage/bottomImage.svg" className={"bottom-image"}/>
-                    <Footer/>
+                    <ZrFooter/>
                 </div>
             </div>
             :
@@ -98,7 +98,7 @@ function PaymentPage() {
                             </button>
                         </a>
                     </div>
-                    <Footer/>
+                    <ZrFooter/>
                 </div>
             </div>
     );

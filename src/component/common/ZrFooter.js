@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Footer(props) {
+function ZrFooter(props) {
     return (
         <div className="login-footer">
             All rights reserved © copyright www.zaplacrecepte.pl 2020
@@ -8,4 +8,4 @@ function Footer(props) {
     );
 }
 
-export default Footer;
+export default ZrFooter;
