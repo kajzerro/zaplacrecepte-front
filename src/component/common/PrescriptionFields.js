@@ -114,6 +114,7 @@ function ListRow(props) {
                 }}
                 onBlur={() => setFormFirstNameChanged(true)}
                 isInvalid={formFirstNameChanged && !formFirstNameValid}
+                autoFocus = {true}
             />
             <ZrInput
                 label={"Nazwisko"}
