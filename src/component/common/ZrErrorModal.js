@@ -12,7 +12,6 @@ function ZrErrorModal(props) {
     }
 
     useEffect(() => {
-        console.log("zmiana show na " + props.show);
         setShow(props.show);
         setMessage(props.message);
     }, [props.show, props.message]);
@@ -23,7 +22,7 @@ function ZrErrorModal(props) {
                dialogClassName={"zr-error-modal"}>
             <Modal.Header>
                 <Modal.Title>
-                    <h4 className="zr-header">Błąd</h4>
+                    <h4 className="zr-header">{props.header}</h4>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

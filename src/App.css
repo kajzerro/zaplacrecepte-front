@@ -263,6 +263,93 @@ h3.zr-header {
     color: #2F4FA7;
 }
 
+.zr-textarea {
+    position: relative;
+}
+
+.zr-textarea label {
+    position: absolute;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.6);
+    top: -6px;
+    left: 11px;
+    background: white;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.zr-textarea label.disabled {
+    background-color: rgb(235, 235, 228);
+    border-radius: 3.5px;
+}
+
+.zr-textarea.invalid label {
+    color: #E21717;
+}
+
+.zr-textarea textarea[type=text] {
+    padding-top: 0.5em;
+    width: 100%;
+    height: 40px;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 3.5px;
+    padding-left: 15px;
+
+
+    /* Subtitle 1 */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+
+    /* identical to box height, or 150% */
+    letter-spacing: 0.15px;
+
+    /* 00. On Surface / Medium Emphasis */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.zr-textarea.invalid textarea[type=text] {
+    border: 1px solid #E21717;
+}
+
+.zr-textarea textarea[type=text]:focus {
+    border: 1px solid #2F4FA7;
+    outline: none;
+}
+
+.zr-textarea ::-webkit-input-placeholder { /* Edge */
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.zr-textarea :-ms-input-placeholder { /* Internet Explorer */
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.zr-textarea ::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.zr-textarea .patient-input-error-message {
+    display: none;
+}
+
+.zr-textarea.invalid .patient-input-error-message {
+    width: 100%;
+    color: red;
+    margin-right: 5px;
+    text-align: right;
+    font-size: 14px;
+    display: block;
+}
+
 .zr-checkbox {
     font-family: Ubuntu;
     font-style: normal;
@@ -398,6 +485,96 @@ h3.zr-header {
 
 .zr-status-change-unwrapped .status.red label {
     color: #951112;
+}
+
+
+.zr-header-menu {
+    margin-right: -80px;
+}
+
+.zr-header-menu li {
+    display: inline-block;
+    padding-left: 37.5px;
+    padding-right: 37.5px;
+    cursor: pointer;
+
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.15px;
+    color: #000000;
+
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (max-width: 1100px) {
+    .zr-header-menu li {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+.zr-header-menu ul {
+    padding-left: 0;
+    margin-top: 58px;
+    min-width: 360px;
+}
+
+.zr-header-menu img {
+    margin-top: 5px;
+    width: 100%;
+    min-width: 190px;
+    max-width: 250px;
+
+    position: absolute;
+
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@media (max-height: 600px) {
+    .zr-header-menu ul {
+        margin-top: 35px;
+    }
+
+    .zr-header-menu img {
+        top: 38%;
+    }
+}
+
+.blue-background {
+    background-color: #e8f8ff;
+}
+
+
+.centered-body-wrapper {
+    width: 430px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 20px;
+    z-index: 2;
+}
+
+@media (min-width: 1200px) {
+    .centered-body-wrapper.left-site {
+        left: 55%;
+    }
+}
+
+@media (max-height: 600px) {
+    .centered-body-wrapper {
+        width: 350px;
+    }
 }
 
 .patient-row {
@@ -999,4 +1176,35 @@ h3.zr-header {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.image-on-footer {
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    height: 44vh;
+    max-height: 25vw;
+    z-index: 1;
+}
+
+.contact-page .centered-body-wrapper.left-site {
+    left: 60%;
+}
+
+@media (min-width: 1200px) {
+    .contact-page .centered-body-wrapper.left-site {
+        left: 65%;
+    }
+}
+
+.contact-page .zr-input {
+    width: 100%;
+}
+
+.contact-page .zr-textarea {
+    width: 100%;
+}
+
+.contact-page .zr-textarea textarea[type=text] {
+    height: 30vh;
 }

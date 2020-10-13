@@ -7,7 +7,7 @@ function ZrHeaderMenu(props) {
     return (
         <div className="row">
             <div className="col-12">
-                <div className="row login-header">
+                <div className="row zr-header-menu">
                     <div className="col-4">
                         <img src="logo.svg"/>
                     </div>

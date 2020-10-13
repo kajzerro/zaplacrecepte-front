@@ -356,7 +356,7 @@ function ListPage() {
                 </Modal.Footer>
             </Modal>
             <ZrErrorModal show={errorAlert.show} onClose={errorAlert.onClose} message={errorAlert.message}
-                          key={errorAlert.key}/>
+                          key={errorAlert.key} header={"Błąd"}/>
         </>
 
 

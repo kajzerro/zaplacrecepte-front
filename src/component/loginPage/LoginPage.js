@@ -38,8 +38,8 @@ function LoginPage() {
                     <div className="row fullscreen">
                         <div className="col-6">
                             <ZrHeaderMenu/>
-                            <div className="row body-wrapper">
-                                <div className="col-12 offset-xl-1 col-xl-11">
+                            <div className="row centered-body-wrapper left-site">
+                                <div className="col-12">
                                     <h1 className="zr-header">Witaj w ZaplacRecepte.pl</h1>
                                     <div className="input-frame">
                                         <div className="zr-header-description">Zaloguj się podając e-mail i hasło, aby w
@@ -77,7 +77,7 @@ function LoginPage() {
                             </div>
                         </div>
                         <div className="col-6 right-side">
-                            <div className="background"/>
+                            <div className="background blue-background"/>
                             <img src="loginPage/loginImage.png"/>
                         </div>
                         <ZrFooter/>
