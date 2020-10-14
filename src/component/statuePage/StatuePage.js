@@ -1,9 +1,20 @@
 import React from 'react';
+import ZrHeaderMenu from "../common/ZrHeaderMenu";
 
 function StatuePage() {
 
     return (
-        <div className="statue">
+        <div className="blue-background">
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-6">
+                        <ZrHeaderMenu/>
+                    </div>
+                    <div className="col-6">
+                    </div>
+                </div>
+            </div>
+            <div className="statue blue-background">
           <h1>Regulamin</h1> <br/>
           <h3>§1. Postanowienia ogólne</h3>
           <ol>
@@ -104,6 +115,7 @@ function StatuePage() {
               <li>W sprawach nieuregulowanych w Regulaminie stosuje się przepisy ustawy oświadczeniu usług drogą elektroniczną, ustawy o prawie autorskim i prawachpokrewnych oraz Kodeksu cywilnego.</li>
               <li>Właściwym do rozstrzygania sporów wynikających ze świadczenia Usług, wprzypadku sporów z Użytkownikami niebędącymi konsumentami jest sąd właściwydla siedziby Usługodawcy. Użytkownik będący konsumentem ma możliwośćskorzystania z pozasądowego sposobu rozpatrywania sporów przed StałymPolubownym Sądem Konsumenckim przy Mazowieckim Wojewódzkim InspektorzeInspekcji Handlowej w Warszawie. Informacje o sposobie dostępu do ww. trybu iprocedur rozstrzygania sporów znajdują się pod następującym adresem:www.uokik.gov.pl​ oraz pod adresem: ​https://konsument.gov.pl/​. Użytkownik będącykonsumentem ma również możliwość skorzystania z unijnej platformy internetowejODR, dostępnej pod adresem: ​http://ec.europa.eu/consumers/odr/​.</li>
             </ol>
+        </div>
         </div>
     );
 }

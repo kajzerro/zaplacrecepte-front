@@ -9,7 +9,7 @@ function ZrHeaderMenu(props) {
             <div className="col-12">
                 <div className="row zr-header-menu">
                     <div className="col-4">
-                        <img src="logo.svg"/>
+                        <img onClick={() => history.push('/')} src="logo.svg"/>
                     </div>
                     <div className="col-8">
                         <ul>
