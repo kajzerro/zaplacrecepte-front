@@ -85,7 +85,6 @@ function PaymentPage() {
                         >
                             <Form.Check.Input type="checkbox"
                                               onChange={e => {
-                                                  console.log(e.target.checked);
                                                   setAccepted(e.target.checked);
                                               }}/>
                             <Form.Check.Label className={"declaration"}>Oświadczam, że zapoznałem/am się z <a

@@ -31,6 +31,8 @@ function ListPage() {
     });
     const [searchPatientQuery, setSearchPatientQuery] = useState("");
     const [showMenu, setShowMenu] = useState(false);
+    const [labelFullName, setLabelFullName] = useState("");
+    const [ownerEmail, setOwnerEmail] = useState("");
 
     const searchPatientFilter = (patientData) => {
         return searchPatientQuery === "" ||
@@ -128,7 +130,20 @@ function ListPage() {
             });
     }
 
+    function fetchUser() {
+        axios.get(getEndpoint() + "/api/login")
+            .then((response) => {
+                setLabelFullName("Dr " + response.data.firstName + " " + response.data.lastName);
+                setOwnerEmail(response.data.email);
+            })
+            .catch(err => {
+                setLabelFullName("");
+                setOwnerEmail("");
+            });
+    }
+
     useEffect(() => {
+        fetchUser();
         fetchData();
         const id = setInterval(fetchData, 60 * 1000);
         return () => clearInterval(id);
@@ -154,7 +169,7 @@ function ListPage() {
                                 <button className="menu-button to-bottom" onClick={() => setShowMenu(true)}>
                                     <img src="listPage/awatar.png"/>
                                     <span>
-                                Dr Marek Krzystyniak
+                                        {labelFullName}
                                 </span>
                                 </button>
                                 {showMenu &&
@@ -162,10 +177,10 @@ function ListPage() {
                                     <div className={"menu"}>
                                         <img className={"big-avatar"} src="listPage/awatar.png"/>
                                         <h4 className={"zr-header"}>
-                                            Dr Marek Krzystyniak
+                                            {labelFullName}
                                         </h4>
                                         <div className={"mb-3"}>
-                                            <span>krzyampagabinet@outlook.com</span>
+                                            <span>{ownerEmail}</span>
                                         </div>
                                         <button className={"log-out"} onClick={handleLogout}>
                                             <img src="listPage/logOut.svg"/> Wyloguj się
@@ -264,7 +279,7 @@ function ListPage() {
                 </Modal.Header>
                 <Modal.Body>
                     <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll}
-                                        defaultEmailFeature={true}/>
+                                        defaultEmailFeature={true} ownerEmailAddress={ownerEmail}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
@@ -312,7 +327,8 @@ function ListPage() {
                             <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
                             <ZrStatusButton value={editedStatus}/>
                             <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}
-                                                copyPeselButton defaultEmailFeature={true}/>
+                                                copyPeselButton defaultEmailFeature={true}
+                                                ownerEmailAddress={ownerEmail}/>
                         </>
                     }
                 </Modal.Body>

@@ -6,7 +6,6 @@ import ZrInput from './ZrInput';
 import ZrCheckbox from "./ZrCheckbox";
 
 function ListRow(props) {
-    const OWNER_EMAIL_ADDRESS = "krzyampagabinet@outlook.com";
 
     const isNotEmpty = (input) => {
         return input !== "";
@@ -47,22 +46,21 @@ function ListRow(props) {
     const [formPhoneNumberValid, setFormPhoneNumberValid] = useState(isPhoneNumberValid(formPhoneNumber));
     const [formPhoneNumberChanged, setFormPhoneNumberChanged] = useState(false);
 
-    const [formEmail, setFormEmail] = useState(props.initData.email || OWNER_EMAIL_ADDRESS);
+    const [formEmail, setFormEmail] = useState(props.initData.email || props.ownerEmailAddress);
     const [formEmailValid, setFormEmailValid] = useState(isEmailValid(formEmail));
     const [formEmailChanged, setFormEmailChanged] = useState(false);
 
     const [showOneFormOfContact, setShowOneFormOfContact] = useState(false);
     const [copied, setCopied] = useState(false);
 
-    const [useDefaultEmail, setUseDefaultEmail] = useState(props.initData.email === undefined || props.initData.email === OWNER_EMAIL_ADDRESS);
-    console.log(props.initData.email);
+    const [useDefaultEmail, setUseDefaultEmail] = useState(props.initData.email === undefined || props.initData.email === props.ownerEmailAddress);
     const setUseDefaultEmailWrapper = (value) => {
         setUseDefaultEmail(value);
         if (value === true) {
-            setFormEmail(OWNER_EMAIL_ADDRESS);
+            setFormEmail(props.ownerEmailAddress);
             setFormEmailValid(true);
         } else {
-            if (!(props.initData.email === undefined || props.initData.email === OWNER_EMAIL_ADDRESS)) {
+            if (!(props.initData.email === undefined || props.initData.email === props.ownerEmailAddress)) {
                 setFormEmail(props.initData.email);
             } else {
                 setFormEmail("");
@@ -92,7 +90,7 @@ function ListRow(props) {
                 postalCode: formPostalCode,
                 remarks: formRemarks,
                 phoneNumber: formPhoneNumber,
-                email: formEmail ? formEmail : OWNER_EMAIL_ADDRESS,
+                email: formEmail ? formEmail : props.ownerEmailAddress,
                 allValid: allValid
             });
     }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, onChange, allValid]);
