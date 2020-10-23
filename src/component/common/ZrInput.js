@@ -14,12 +14,15 @@ function ZrInput(props) {
             <label className={props.disabled ? "disabled" : ""}>
                 {props.label}
             </label>
-            <input type="text" value={props.value} onChange={props.onChange} onBlur={props.onBlur}
+            <input type={props.type ? props.type : "text"} value={props.value} onChange={props.onChange}
+                   onBlur={props.onBlur}
                    onSelect={onSelectAction}
                    placeholder={props.placeholder}
                    readOnly={props.onChange === undefined} disabled={props.disabled}
-                   autoFocus = {props.autoFocus && props.value === ''}/>
+                   autoFocus={props.autoFocus && props.value === ''}
+                   autoComplete="new-password"/>
             <div className="patient-input-error-message">{props.errorMessage}</div>
+            {props.children}
         </div>
     );
 }

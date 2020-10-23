@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
 import './LoginPage.css';
 import axios from 'axios';
-import {getEndpoint} from '../config/Config';
+import {getEndpoint, saveUserData} from '../config/Config';
 import ZrFooter from '../common/ZrFooter';
 import ZrHeaderMenu from "../common/ZrHeaderMenu";
 
@@ -17,10 +17,12 @@ function LoginPage() {
                     password: formPassword
                 }
             })
-            .then(() => {
+            .then((response) => {
+                saveUserData(response.data);
                 history.push('/lista');
             })
             .catch(err => {
+                saveUserData({});
                 setWrongUserOrPassword(true);
                 console.error(err)
             });

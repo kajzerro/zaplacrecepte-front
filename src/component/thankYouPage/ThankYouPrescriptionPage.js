@@ -1,7 +1,7 @@
 import React from 'react';
 import ZrFooter from "../common/ZrFooter";
 
-function ThankYouPage() {
+function ThankYouPrescriptionPage() {
 
     return (
         <div className="thankyou-page">
@@ -24,4 +24,4 @@ function ThankYouPage() {
     );
 }
 
-export default ThankYouPage;
+export default ThankYouPrescriptionPage;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ListRow from './ListRow';
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios';
-import {getEndpoint} from '../config/Config';
+import {getEndpoint, getUserData, isPrescriptionClientType, isServiceClientType, saveUserData} from '../config/Config';
 import PrescriptionFields from '../common/PrescriptionFields';
 import StatusSelection from './StatusSelection';
 import {useHistory} from "react-router-dom";
@@ -10,6 +10,9 @@ import moment from 'moment-timezone';
 import ZrStatusButton from '../common/ZrStatusButton';
 import ZrInput from "../common/ZrInput";
 import ZrErrorModal from "../common/ZrErrorModal";
+import PrescriptionToolbar from "./PrescriptionToolbar";
+import ServiceToolbar from "./ServiceToolbar";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 function ListPage() {
 
@@ -31,8 +34,7 @@ function ListPage() {
     });
     const [searchPatientQuery, setSearchPatientQuery] = useState("");
     const [showMenu, setShowMenu] = useState(false);
-    const [labelFullName, setLabelFullName] = useState("");
-    const [ownerEmail, setOwnerEmail] = useState("");
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
     const searchPatientFilter = (patientData) => {
         return searchPatientQuery === "" ||
@@ -52,7 +54,10 @@ function ListPage() {
     };
     const handleLogout = () => {
         axios.get(getEndpoint() + "/api/logout")
-            .finally(() => history.push('/'));
+            .finally(() => {
+                history.push('/');
+                saveUserData({});
+            });
     };
     const handleAddSave = () => {
         if (newPrescriptionData.allValid) {
@@ -130,22 +135,9 @@ function ListPage() {
             });
     }
 
-    function fetchUser() {
-        axios.get(getEndpoint() + "/api/login")
-            .then((response) => {
-                setLabelFullName("Dr " + response.data.firstName + " " + response.data.lastName);
-                setOwnerEmail(response.data.email);
-            })
-            .catch(err => {
-                setLabelFullName("");
-                setOwnerEmail("");
-            });
-    }
-
     useEffect(() => {
-        fetchUser();
         fetchData();
-        const id = setInterval(fetchData, 60 * 1000);
+        const id = setInterval(fetchData, 15 * 1000);
         return () => clearInterval(id);
     }, []);
 
@@ -169,7 +161,7 @@ function ListPage() {
                                 <button className="menu-button to-bottom" onClick={() => setShowMenu(true)}>
                                     <img src="listPage/awatar.png"/>
                                     <span>
-                                        {labelFullName}
+                                        {"Dr " + getUserData().firstName + " " + getUserData().lastName}
                                 </span>
                                 </button>
                                 {showMenu &&
@@ -177,11 +169,17 @@ function ListPage() {
                                     <div className={"menu"}>
                                         <img className={"big-avatar"} src="listPage/awatar.png"/>
                                         <h4 className={"zr-header"}>
-                                            {labelFullName}
+                                            {"Dr " + getUserData().firstName + " " + getUserData().lastName}
                                         </h4>
                                         <div className={"mb-3"}>
-                                            <span>{ownerEmail}</span>
+                                            <span>{getUserData().email}</span>
                                         </div>
+                                        <button className={"log-out"} onClick={() => {
+                                            setShowMenu(false);
+                                            setShowChangePasswordModal(true);
+                                        }}>
+                                            Zmień hasło
+                                        </button>
                                         <button className={"log-out"} onClick={handleLogout}>
                                             <img src="listPage/logOut.svg"/> Wyloguj się
                                         </button>
@@ -194,43 +192,9 @@ function ListPage() {
                 </div>
                 <div>
                     <div className="container">
-                        <div className="row mb-5">
-                            <div className="col-5 mt-2">
-                                <h2 className="zr-header">
-                                    Recepty
-                                </h2>
-                                <div className="zr-header-description">
-                                    Sprawdź status oraz szczegóły wystawionych recept
-                                </div>
-                            </div>
-                            <div className="col-7">
-                                <div className="container-fluid functional-top">
-                                    <div className="row">
-                                        <div className="col-3">
-                                            {/*        <div className="select">*/}
-                                            {/*<span>*/}
-                                            {/*Lista*/}
-                                            {/*</span>*/}
-                                            {/*        </div>*/}
-                                        </div>
-                                        <div className="col-4">
-                                            {/*        <div className="select">*/}
-                                            {/*<span>*/}
-                                            {/*Sortowanie*/}
-                                            {/*</span>*/}
-                                            {/*        </div>*/}
-                                        </div>
-                                        <div className="col-5">
-                                            <button type="button"
-                                                    className="btn btn-block zr-red-button"
-                                                    onClick={() => setShowAddModal(true)}>+&nbsp;&nbsp;Wystaw recepte
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        {isPrescriptionClientType() ?
+                            <PrescriptionToolbar action={() => setShowAddModal(true)}/> : null}
+                        {isServiceClientType() ? <ServiceToolbar action={() => setShowAddModal(true)}/> : null}
                         <div className="row table-header">
                             <div className="col-2">
                                 Data
@@ -242,7 +206,8 @@ function ListPage() {
                                 Pesel
                             </div>
                             <div className="col-2">
-                                Kod pocztowy
+                                {isPrescriptionClientType() && "Kod pocztowy"}
+                                {isServiceClientType() && "Kwota"}
                             </div>
                             <div className="col-3">
                                 Status
@@ -274,12 +239,13 @@ function ListPage() {
             <Modal show={showAddModal} onHide={handleClose} animation={false} dialogClassName={"list-page-modal"}>
                 <Modal.Header closeButton>
                     <Modal.Title><h4 className="zr-header">
-                        Recepty
+                        {isPrescriptionClientType() ? "Nowa recepta" : null}
+                        {isServiceClientType() ? "Nowa płatność" : null}
                     </h4></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <PrescriptionFields onChange={setNewPrescriptionData} initData={{}} checkAll={checkAll}
-                                        defaultEmailFeature={true} ownerEmailAddress={ownerEmail}/>
+                                        defaultEmailFeature={true} ownerEmailAddress={getUserData().email}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
@@ -288,7 +254,8 @@ function ListPage() {
                     <div className="patient-blocking-button half-width-button">
                         <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
                         <button className="btn zr-red-button" onClick={handleAddSave} disabled={savingInProgress}>
-                            Zapisz i dodaj recepte
+                            {isPrescriptionClientType() ? "Zapisz i dodaj recepte" : null}
+                            {isServiceClientType() ? "Zapisz i dodaj płatność" : null}
                         </button>
                     </div>
                 </Modal.Footer>
@@ -298,7 +265,8 @@ function ListPage() {
                 <Modal.Header>
                     <Modal.Title>
                         {!inRealizationState && <h4 className="zr-header">Szczegóły recepty</h4>}
-                        {inRealizationState && <h4 className="zr-header">Realizacja recepty dla: {selectedRowData.firstName} {selectedRowData.lastName}</h4>}
+                        {inRealizationState && <h4 className="zr-header">Realizacja recepty
+                            dla: {selectedRowData.firstName} {selectedRowData.lastName}</h4>}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -321,14 +289,16 @@ function ListPage() {
                                 onClick={() => {
                                     setInRealizationState(true);
                                     setEditedStatus('COMPLETED');
-                                }}>Zrealizuj receptę
+                                }}>
+                                {isPrescriptionClientType() ? "Zrealizuj receptę" : null}
+                                {isServiceClientType() ? "Wyślij receptę" : null}
                             </button>
                             }
                             <StatusSelection onChange={setEditedStatus} initData={selectedRowData.status}/>
                             <ZrStatusButton value={editedStatus}/>
                             <PrescriptionFields onChange={setEditedPrescriptionData} initData={selectedRowData}
                                                 copyPeselButton defaultEmailFeature={true}
-                                                ownerEmailAddress={ownerEmail}/>
+                                                ownerEmailAddress={getUserData().email}/>
                         </>
                     }
                 </Modal.Body>
@@ -360,7 +330,8 @@ function ListPage() {
                                 <span className={"spinner-border" + (savingInProgress ? "" : "invisible")}/>
                                 <button className="btn zr-blue-button" onClick={handleEditSave}
                                         disabled={savingInProgress}>
-                                    Zrealizuj receptę
+                                    {isPrescriptionClientType() ? "Zrealizuj receptę" : null}
+                                    {isServiceClientType() ? "Wyślij receptę" : null}
                                 </button>
                             </div>
                         </>
@@ -369,6 +340,7 @@ function ListPage() {
             </Modal>
             <ZrErrorModal show={errorAlert.show} onClose={errorAlert.onClose} message={errorAlert.message}
                           key={errorAlert.key} header={"Błąd"}/>
+            <ChangePasswordModal show={showChangePasswordModal} showToggle={setShowChangePasswordModal}/>
         </>
 
 
