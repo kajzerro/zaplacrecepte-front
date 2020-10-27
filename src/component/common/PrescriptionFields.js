@@ -4,6 +4,7 @@ import {validatePolish} from 'validate-polish';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ZrInput from './ZrInput';
 import ZrCheckbox from "./ZrCheckbox";
+import {getUserData, isPrescriptionClientType, isServiceClientType} from "../config/Config";
 
 function ListRow(props) {
 
@@ -54,6 +55,11 @@ function ListRow(props) {
     const [copied, setCopied] = useState(false);
 
     const [useDefaultEmail, setUseDefaultEmail] = useState(props.initData.email === undefined || props.initData.email === props.ownerEmailAddress);
+
+    const [formPrice, setFormPrice] = useState(props.initData.price || (isServiceClientType() ? getUserData().defaultPrice : ""));
+    const [formPriceValid, setFormPriceValid] = useState(isNotEmpty(formPrice));
+    const [formPriceChanged, setFormPriceChanged] = useState(false);
+
     const setUseDefaultEmailWrapper = (value) => {
         setUseDefaultEmail(value);
         if (value === true) {
@@ -91,13 +97,14 @@ function ListRow(props) {
                 remarks: formRemarks,
                 phoneNumber: formPhoneNumber,
                 email: formEmail ? formEmail : props.ownerEmailAddress,
+                price: formPrice,
                 allValid: allValid
             });
     }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, onChange, allValid]);
 
     const checkAll = props.checkAll;
     useEffect(() => {
-        if(checkAll === true) {
+        if (checkAll === true) {
             setFormFirstNameChanged(true);
             setFormLastNameChanged(true);
             setFormPeselChanged(true);
@@ -109,6 +116,28 @@ function ListRow(props) {
 
     return (
         <>
+            {isServiceClientType() ?
+                <ZrInput
+                    label={"Kwota"}
+                    errorMessage={"Pole kwota nie może być puste"}
+                    placeholder={"Kwota płatności"}
+                    className="mb-3"
+                    disabled={props.disabled}
+                    value={formPrice}
+                    onChange={e => {
+                        let trimmedValue = e.target.value.replace(/\D/g, '');
+                        setFormPriceValid(isNotEmpty(trimmedValue));
+                        setFormPrice(trimmedValue);
+                    }}
+                    onBlur={() => setFormPriceChanged(true)}
+                    isInvalid={formPriceChanged && !formPriceValid}
+                    autoFocus={true}
+                >
+                    <div className={"right-aligned-description"}>
+                        PLN
+                    </div>
+                </ZrInput> : null}
+
             <ZrInput
                 label={"Imię"}
                 errorMessage={"Pole imię nie może być puste"}
@@ -122,7 +151,7 @@ function ListRow(props) {
                 }}
                 onBlur={() => setFormFirstNameChanged(true)}
                 isInvalid={formFirstNameChanged && !formFirstNameValid}
-                autoFocus = {true}
+                autoFocus={isPrescriptionClientType()}
             />
             <ZrInput
                 label={"Nazwisko"}
@@ -174,20 +203,37 @@ function ListRow(props) {
                 value={formPostalCode}
                 onChange={e => setFormPostalCode(e.target.value)}
             />
-            <ZrInput
-                label={"Leki na recepcie"}
-                errorMessage={"Pole leki na recepcie nie może być puste"}
-                placeholder={"Nazwy leków"}
-                className="mb-3"
-                disabled={props.disabled}
-                value={formRemarks}
-                onChange={e => {
-                    setFormRemarksValid(isNotEmpty(e.target.value));
-                    setFormRemarks(e.target.value);
-                }}
-                onBlur={() => setFormRemarksChanged(true)}
-                isInvalid={formRemarksChanged && !formRemarksValid}
-            />
+            {isPrescriptionClientType() ?
+                <ZrInput
+                    label={"Leki na recepcie"}
+                    errorMessage={"Pole leki na recepcie nie może być puste"}
+                    placeholder={"Nazwy leków"}
+                    className="mb-3"
+                    disabled={props.disabled}
+                    value={formRemarks}
+                    onChange={e => {
+                        setFormRemarksValid(isNotEmpty(e.target.value));
+                        setFormRemarks(e.target.value);
+                    }}
+                    onBlur={() => setFormRemarksChanged(true)}
+                    isInvalid={formRemarksChanged && !formRemarksValid}
+                /> : null}
+            {isServiceClientType() ?
+                <ZrInput
+                    label={"Szczegóły usługi"}
+                    errorMessage={"Pole szczegóły usługi nie może być puste"}
+                    placeholder={"Czego dotyczy płatność"}
+                    className="mb-3"
+                    disabled={props.disabled}
+                    value={formRemarks}
+                    onChange={e => {
+                        setFormRemarksValid(isNotEmpty(e.target.value));
+                        setFormRemarks(e.target.value);
+                    }}
+                    onBlur={() => setFormRemarksChanged(true)}
+                    isInvalid={formRemarksChanged && !formRemarksValid}
+                /> : null}
+
             <ZrInput
                 label={"Numer telefonu"}
                 errorMessage={"Niepoprawny numer telefonu"}

@@ -1,5 +1,6 @@
 import React from 'react';
 import ZrStatusButton from '../common/ZrStatusButton';
+import {isPrescriptionClientType, isServiceClientType} from "../config/Config";
 
 function ListRow(props) {
 
@@ -18,12 +19,21 @@ function ListRow(props) {
             <div className="col-2">
                 <span>{props.prescription.pesel}</span>
             </div>
+
             <div className="col-2">
-                <span>{props.prescription.postalCode}</span>
+                <span>
+                    {isPrescriptionClientType() && props.prescription.postalCode}
+                    {isServiceClientType() && props.prescription.price + " PLN"}
+                </span>
             </div>
             <div className="col-3">
                 <ZrStatusButton value={props.prescription.status}/>
             </div>
+            {isServiceClientType() && props.prescription.prescriptionNumber ?
+                <div className="col-12 prescription-sent-info">
+                    <hr/>
+                    Wysłano kod recepty: {props.prescription.prescriptionNumber}
+                </div> : null}
         </div>
     );
 }
