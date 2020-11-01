@@ -5,6 +5,7 @@ import LoginPage from './component/loginPage/LoginPage';
 import ListPage from "./component/listPage/ListPage";
 import ThankYouPrescriptionPage from "./component/thankYouPage/ThankYouPrescriptionPage";
 import ThankYouServicePage from "./component/thankYouPage/ThankYouServicePage";
+import ThankYouRouterPage from "./component/thankYouPage/ThankYouRouterPage";
 import PaymentPrescriptionPage from "./component/paymentPage/PaymentPrescriptionPage";
 import PaymentServicePage from "./component/paymentPage/PaymentServicePage";
 import StatuePage from "./component/statuePage/StatuePage";
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/lista" component={ListPage}/>
                 <Route path="/prescription/thankyou" component={ThankYouPrescriptionPage}/>
                 <Route path="/service/thankyou" component={ThankYouServicePage}/>
+                <Route path="/thankyou" component={ThankYouRouterPage}/>
                 <Route path="/p/:prescriptionId" component={PaymentPrescriptionPage}/>
                 <Route path="/s/:prescriptionId" component={PaymentServicePage}/>
                 <Route path="/regulamin" component={StatuePage}/>
