@@ -9,7 +9,7 @@ import {getUserData, isPrescriptionClientType, isServiceClientType} from "../con
 function ListRow(props) {
 
     const isNotEmpty = (input) => {
-        return input !== "";
+        return input !== null && input !== "";
     };
 
     const isPeselValid = (input) => {
@@ -51,12 +51,11 @@ function ListRow(props) {
     const [formEmailValid, setFormEmailValid] = useState(isEmailValid(formEmail));
     const [formEmailChanged, setFormEmailChanged] = useState(false);
 
-    const [showOneFormOfContact, setShowOneFormOfContact] = useState(false);
     const [copied, setCopied] = useState(false);
 
     const [useDefaultEmail, setUseDefaultEmail] = useState(props.initData.email === undefined || props.initData.email === props.ownerEmailAddress);
 
-    const [formPrice, setFormPrice] = useState(props.initData.price || (isServiceClientType() ? getUserData().defaultPrice : ""));
+    const [formPrice, setFormPrice] = useState(props.initData.price || (isServiceClientType() ? getUserData().defaultPrice || "" : ""));
     const [formPriceValid, setFormPriceValid] = useState(isNotEmpty(formPrice));
     const [formPriceChanged, setFormPriceChanged] = useState(false);
 
@@ -76,6 +75,15 @@ function ListRow(props) {
     };
 
     const isAllValid = () => {
+        if (isServiceClientType()) {
+            return formFirstNameValid &&
+                formLastNameValid &&
+                formPeselValid &&
+                formRemarksValid &&
+                formPhoneNumberValid &&
+                formEmailValid &&
+                formPriceValid;
+        }
         return formFirstNameValid &&
             formLastNameValid &&
             formPeselValid &&
@@ -111,6 +119,9 @@ function ListRow(props) {
             setFormRemarksChanged(true);
             setFormPhoneNumberChanged(true);
             setFormEmailChanged(true);
+            if (isServiceClientType()) {
+                setFormPriceChanged(true);
+            }
         }
     }, [checkAll]);
 
@@ -151,7 +162,7 @@ function ListRow(props) {
                 }}
                 onBlur={() => setFormFirstNameChanged(true)}
                 isInvalid={formFirstNameChanged && !formFirstNameValid}
-                autoFocus={isPrescriptionClientType()}
+                autoFocus={isPrescriptionClientType() || isNotEmpty(formPrice)}
             />
             <ZrInput
                 label={"Nazwisko"}
