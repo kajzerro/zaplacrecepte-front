@@ -28,7 +28,7 @@ function ChangePasswordModal(props) {
         setErrorAlert({...properties, key: Math.random()});
     };
 
-    return [<ZrModal
+    return <ZrModal
         show={props.show}
         showToggle={props.showToggle}
         title={"Zmiana hasła"}
@@ -47,7 +47,7 @@ function ChangePasswordModal(props) {
                 })
             })
             .catch(err => {
-                    if (err.response.status === 403) {
+                if (err && err.response && err.response.status === 403) {
                         showAlert({
                             show: true, onClose: () => {
                             },
@@ -93,10 +93,10 @@ function ChangePasswordModal(props) {
             Podane hasła nie pasują
         </div>
         }
-    </ZrModal>,
         <ZrErrorModal show={errorAlert.show} onClose={() => {
         }} message={errorAlert.message}
-                      key={errorAlert.key} header={errorAlert.header}/>];
+                      key={errorAlert.key} header={errorAlert.header}/>
+    </ZrModal>;
 }
 
 export default ChangePasswordModal;
