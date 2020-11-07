@@ -4,12 +4,19 @@ import {validatePolish} from 'validate-polish';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ZrInput from './ZrInput';
 import ZrCheckbox from "./ZrCheckbox";
-import {getUserData, isPrescriptionClientType, isServiceClientType} from "../config/Config";
+import {getUserData, isFeeIncluded, isPrescriptionClientType, isServiceClientType} from "../config/Config";
 
 function ListRow(props) {
 
     const isNotEmpty = (input) => {
         return input !== null && input !== "";
+    };
+
+    const isPriceValid = (input) => {
+        if (isFeeIncluded()) {
+            return isNotEmpty(input) && input > 3;
+        }
+        return isNotEmpty(input);
     };
 
     const isPeselValid = (input) => {
@@ -56,7 +63,7 @@ function ListRow(props) {
     const [useDefaultEmail, setUseDefaultEmail] = useState(props.initData.email === undefined || props.initData.email === props.ownerEmailAddress);
 
     const [formPrice, setFormPrice] = useState(props.initData.price || (isServiceClientType() ? getUserData().defaultPrice || "" : ""));
-    const [formPriceValid, setFormPriceValid] = useState(isNotEmpty(formPrice));
+    const [formPriceValid, setFormPriceValid] = useState(isPriceValid(formPrice));
     const [formPriceChanged, setFormPriceChanged] = useState(false);
 
     const setUseDefaultEmailWrapper = (value) => {
@@ -130,14 +137,14 @@ function ListRow(props) {
             {isServiceClientType() ?
                 <ZrInput
                     label={"Kwota"}
-                    errorMessage={"Pole kwota nie może być puste"}
+                    errorMessage={isFeeIncluded() ? "Kwota musi być większa niż 3PLN" : "Pole kwota nie może być puste"}
                     placeholder={"Kwota płatności"}
                     className="mb-3"
                     disabled={props.disabled}
                     value={formPrice}
                     onChange={e => {
                         let trimmedValue = e.target.value.replace(/\D/g, '');
-                        setFormPriceValid(isNotEmpty(trimmedValue));
+                        setFormPriceValid(isPriceValid(trimmedValue));
                         setFormPrice(trimmedValue);
                     }}
                     onBlur={() => setFormPriceChanged(true)}

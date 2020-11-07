@@ -89,8 +89,8 @@ function PaymentServicePage() {
                                     value={clientData.phoneNumber}
                                 />
                                 <ZrInput
-                                    label={"Kwota (zawiera 3 PLN prowizji)"}
-                                    value={clientData.price + 3}
+                                    label={clientData.feeIncluded ? "Kwota" : "Kwota (zawiera 3 PLN prowizji)"}
+                                    value={clientData.price}
                                 >
                                     <div className={"right-aligned-description"}>
                                         PLN

@@ -20,3 +20,7 @@ export function isPrescriptionClientType() {
 export function isServiceClientType() {
     return getUserData().clientType === "SERVICE_BASED";
 }
+
+export function isFeeIncluded() {
+    return getUserData().feeIncluded === true;
+}
