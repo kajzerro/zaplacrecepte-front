@@ -100,7 +100,7 @@ function ListRow(props) {
                 price: formPrice,
                 allValid: allValid
             });
-    }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, onChange, allValid]);
+    }, [formFirstName, formLastName, formPesel, formPostalCode, formRemarks, formPhoneNumber, formEmail, formPrice, onChange, allValid]);
 
     const checkAll = props.checkAll;
     useEffect(() => {
